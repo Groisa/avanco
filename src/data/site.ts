@@ -21,10 +21,49 @@ export const nav = [
   { label: "Início", href: "#inicio" },
   { label: "Sobre", href: "#sobre" },
   { label: "Serviços", href: "#servicos" },
-  { label: "Setores", href: "#setores" },
+  { label: "Segmentos", href: "#segmentos" },
   { label: "Galeria", href: "#galeria" },
   { label: "Equipe", href: "#equipe" },
   { label: "Contato", href: "#contato" },
+];
+
+// Hero
+export const heroChecklist = [
+  "Atendimento Especializado",
+  "Engenharia Ambiental",
+  "Acompanhamento completo do processo",
+  "Soluções personalizadas",
+];
+
+// These are drawn straight from real data below (services.length,
+// formations.length) instead of invented stats.
+export const heroBadges = [
+  { label: "Formações técnicas na equipe", icon: "team" },
+  { label: "Serviços ambientais prestados", icon: "check" },
+  { label: "Atendimento em Minas Gerais", icon: "pin" },
+];
+
+// Pain points
+export const painPoints = [
+  "Multas",
+  "Embargos",
+  "Paralisação da obra",
+  "Perda de contratos",
+  "Dificuldade para financiamento",
+];
+
+// Quick-glance pillars (icon grid) shown above the detailed services list
+export const pillars = [
+  { title: "Licenciamento Ambiental", icon: "license" },
+  { title: "Intervenção Ambiental", icon: "leaf" },
+  { title: "Outorga de Recursos Hídricos", icon: "drop" },
+  { title: "Geoprocessamento e SIG", icon: "map" },
+  { title: "Levantamentos com Drone", icon: "drone" },
+  { title: "EIV · PCA · PRAD · PTRF", icon: "document" },
+  { title: "Gestão Ambiental", icon: "gear" },
+  { title: "Processos Minerários", icon: "pickaxe" },
+  { title: "CAR e Regularização Rural", icon: "field" },
+  { title: "Gestão de Resíduos", icon: "recycle" },
 ];
 
 export const services = [
@@ -74,7 +113,7 @@ export const services = [
     title: "Auditoria Ambiental",
     description:
       "Diagnóstico de passivos e conformidade ambiental para aquisições, financiamentos e certificações do seu negócio.",
-    image: "/images/campo-sondagem-solo.jpg",
+    image: "/images/campo-amostra-solo-02.jpg",
   },
   {
     title: "Direito Minerário e Fechamento de Mina",
@@ -145,7 +184,7 @@ export const services = [
   {
     title: "Educação Ambiental e Treinamentos",
     description:
-      "Programas de educação ambiental e capacitação de equipes como condicionante de licenças e certificações.",
+      "Palestras, treinamentos e programas de educação ambiental voltados a equipes e comunidades envolvidas no empreendimento.",
     image: "/images/drone-formigueiro.jpg",
   },
   {
@@ -154,32 +193,93 @@ export const services = [
       "Implantação de sistemas de gestão ambiental para manter a operação em conformidade contínua com a legislação.",
     image: "/images/drone-represa-02.jpg",
   },
+  {
+    title: "Sondagem de Solo",
+    description:
+      "Investigação geotécnica do subsolo: identificação das camadas do terreno e do nível d'água, com dados que apoiam projetos de engenharia, obras e estudos ambientais.",
+    image: "/images/campo-sondagem-solo.jpg",
+  },
+  {
+    title: "Revegetação, Recuperação e Proteção Ambiental",
+    description:
+      "Plantio de mudas, recuperação de margens e implantação de cercamentos e estruturas de proteção para áreas em processo de restauração.",
+    image: "/images/drone-fazenda-arvore.jpg",
+  },
+  {
+    title: "Limpeza e Manejo de Áreas",
+    description:
+      "Limpeza, roçada, capina, poda e manutenção de áreas verdes, incluindo romaneio de madeiras em intervenções autorizadas.",
+    image: "/images/campo-motosserra-01.jpg",
+  },
+  {
+    title: "Serviços em Recursos Hídricos",
+    description:
+      "Abertura e limpeza de lagoas, e limpeza de áreas no entorno de corpos hídricos, preservando a qualidade e a conservação dos recursos hídricos.",
+    image: "/images/drone-represa-03.jpg",
+  },
+  {
+    title: "Gestão de Resíduos: Inventário",
+    description:
+      "Levantamento e inventário de resíduos gerados na operação, base para o planejamento de destinação e conformidade legal.",
+    image: "/images/madeira-pilha-serra.jpg",
+  },
+  {
+    title: "Topografia",
+    description:
+      "Levantamento topográfico, planialtimétrico e cadastral, com locação de pontos e apoio ao controle de obras, projetos ambientais e recuperação de áreas.",
+    image: "/images/drone-represa-serra.jpg",
+  },
 ];
 
 export const sectors = [
   {
-    title: "Construção Civil e Imobiliário",
-    description:
-      "Estudos de viabilidade, EIV e controle ambiental de obras, da terraplanagem à entrega do empreendimento.",
-    image: "/images/campo-retroescavadeira.jpg",
-  },
-  {
-    title: "Indústria e Manufatura",
+    title: "Indústrias",
     description:
       "Auditorias, outorgas e monitoramento contínuo para manter a operação industrial em conformidade legal.",
     image: "/images/campo-canalizacao-poco.jpg",
+    icon: "factory",
   },
   {
     title: "Mineração",
     description:
       "Licenciamento, monitoramento e planos de recuperação de áreas degradadas para todo o ciclo de vida da mina.",
     image: "/images/campo-fornos-carvao.jpg",
+    icon: "pickaxe",
   },
   {
-    title: "Produtor Rural e Florestal",
+    title: "Construção Civil",
+    description:
+      "Estudos de viabilidade, EIV e controle ambiental de obras, da terraplanagem à entrega do empreendimento.",
+    image: "/images/campo-retroescavadeira.jpg",
+    icon: "crane",
+  },
+  {
+    title: "Produtores Rurais",
     description:
       "CAR, outorgas de irrigação, documentação florestal e manejo sustentável para propriedades rurais.",
-    image: "/images/drone-reflorestamento-fileiras.jpg",
+    image: "/images/drone-divisa-lavoura.jpg",
+    icon: "leaf",
+  },
+  {
+    title: "Empreendimentos Imobiliários",
+    description:
+      "Estudos de viabilidade e impacto de vizinhança para loteamentos e empreendimentos residenciais e comerciais.",
+    image: "/images/drone-cidade.jpg",
+    icon: "building",
+  },
+  {
+    title: "Postos de Combustíveis",
+    description:
+      "Monitoramento de solo e água subterrânea, e regularização ambiental para operação segura de postos e tanques.",
+    image: "/images/campo-poco-artesiano.jpg",
+    icon: "fuel",
+  },
+  {
+    title: "Prefeituras",
+    description:
+      "Apoio técnico a órgãos públicos em regularização ambiental, cadastros e planos de gestão territorial.",
+    image: "/images/campo-represa-colinas.jpg",
+    icon: "gov",
   },
 ];
 
@@ -196,11 +296,94 @@ export const clients = [
   { name: "Cliente 08" },
 ];
 
-export const team = [
-  { name: "Guilherme Campos", role: "Engenheiro Florestal" },
-  { name: "Antônio de Oliveira", role: "Engenheiro Ambiental" },
-  { name: "Anna Marys", role: "Engenheira de Produção e Civil" },
-  { name: "Paulo Mello", role: "Geólogo" },
+// Educational backgrounds represented on the team, instead of naming
+// individual staff members.
+export const formations = [
+  "Engenharia Ambiental",
+  "Engenharia Florestal",
+  "Engenharia Civil",
+  "Engenharia de Produção",
+  "Engenharia Cartográfica e de Agrimensura",
+  "Engenharia de Segurança do Trabalho",
+  "Geologia",
+  "Biologia",
+  "Engenharia Agronômica",
+  "Arquitetura e Urbanismo",
+];
+
+export const whyUs = [
+  "Ampla experiência técnica multidisciplinar",
+  "Atendimento próximo ao cliente",
+  "Equipe multidisciplinar",
+  "Projetos personalizados",
+  "Agilidade na condução dos processos",
+  "Transparência em todas as etapas",
+  "Soluções focadas em resultado",
+  "Atendimento em Minas Gerais e demais regiões, conforme demanda",
+];
+
+export const process = [
+  {
+    step: "01",
+    title: "Diagnóstico",
+    description: "Entendemos seu empreendimento e identificamos todas as exigências legais.",
+  },
+  {
+    step: "02",
+    title: "Planejamento",
+    description: "Definimos a melhor estratégia para a regularização.",
+  },
+  {
+    step: "03",
+    title: "Execução",
+    description: "Produzimos estudos, projetos e documentos técnicos.",
+  },
+  {
+    step: "04",
+    title: "Acompanhamento",
+    description: "Protocolamos e acompanhamos o processo junto aos órgãos competentes.",
+  },
+  {
+    step: "05",
+    title: "Suporte",
+    description: "Continuamos auxiliando sua empresa após a emissão da licença.",
+  },
+];
+
+export const clientGains = [
+  "Segurança Jurídica",
+  "Economia de Tempo",
+  "Redução de Riscos",
+  "Atendimento Humanizado",
+  "Equipe Especializada",
+  "Menor Burocracia",
+  "Acompanhamento Completo",
+];
+
+export const faq = [
+  {
+    question: "Quanto tempo demora um licenciamento?",
+    answer:
+      "Depende da atividade e do órgão ambiental, mas acompanhamos todo o processo até sua conclusão.",
+  },
+  {
+    question: "Vocês atendem apenas Minas Gerais?",
+    answer:
+      "Atendemos principalmente Minas Gerais, podendo desenvolver projetos em outras localidades conforme a necessidade do cliente.",
+  },
+  {
+    question: "Fazem somente licenciamento?",
+    answer:
+      "Não. Também desenvolvemos estudos ambientais, geoprocessamento, regularização rural, monitoramentos, processos minerários e diversos outros projetos ambientais.",
+  },
+];
+
+export const featureStrip = [
+  { title: "Tecnologia e Inovação", image: "/images/drone-afloramento-rochoso.jpg" },
+  { title: "Presença em Campo", image: "/images/campo-motosserra-02.jpg" },
+  { title: "Coleta e Monitoramento", image: "/images/campo-medicao-ruido-02.jpg" },
+  { title: "Fiscalização e Acompanhamento", image: "/images/campo-marco-georreferenciamento.jpg" },
+  { title: "Mapeamentos e Geoprocessamento", image: "/images/drone-divisa-lavoura.jpg" },
 ];
 
 export const galleryImages = [

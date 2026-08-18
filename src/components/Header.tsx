@@ -66,7 +66,7 @@ export default function Header() {
             rel="noopener noreferrer"
             className="rounded-full bg-clay-500 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-clay-600"
           >
-            Fale conosco
+            Fale com especialista
           </a>
         </div>
 
@@ -106,7 +106,7 @@ export default function Header() {
               rel="noopener noreferrer"
               className="mt-2 rounded-full bg-clay-500 px-5 py-3 text-center text-sm font-semibold text-white"
             >
-              Fale conosco
+              Fale com especialista
             </a>
           </nav>
         </div>

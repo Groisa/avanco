@@ -1,15 +1,7 @@
 import Image from "next/image";
-import { team } from "@/data/site";
+import { formations } from "@/data/site";
+import { Icon } from "./icons";
 import Reveal from "./Reveal";
-
-function initials(name: string) {
-  return name
-    .split(" ")
-    .filter((w) => w.length > 2)
-    .slice(0, 2)
-    .map((w) => w[0])
-    .join("");
-}
 
 export default function Team() {
   return (
@@ -19,7 +11,7 @@ export default function Team() {
           <Reveal>
             <div className="relative aspect-[5/4] w-full overflow-hidden rounded-3xl">
               <Image
-                src="/images/campo-amostra-solo-01.jpg"
+                src="/images/equipe-campo-02.jpg"
                 alt="Equipe da Avanço Ambiental em campo"
                 fill
                 sizes="(min-width: 1024px) 45vw, 90vw"
@@ -34,27 +26,25 @@ export default function Team() {
                 Equipe
               </p>
               <h2 className="mt-4 text-balance font-display text-3xl font-medium leading-tight text-forest-900 sm:text-4xl">
-                Profissionais multidisciplinares, presentes em campo
+                Formações multidisciplinares, presentes em campo
               </h2>
               <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-700">
-                Engenharia florestal, ambiental, civil e geologia trabalhando
-                juntas para viabilizar o seu projeto do início ao fim.
+                Nossa equipe reúne profissionais de diferentes formações
+                técnicas, trabalhando juntos para viabilizar o seu projeto
+                do início ao fim.
               </p>
             </Reveal>
 
-            <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2">
-              {team.map((member, i) => (
-                <Reveal key={member.name} delay={i * 90}>
+            <div className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-2">
+              {formations.map((formation, i) => (
+                <Reveal key={formation} delay={i * 60}>
                   <div className="flex items-center gap-4 rounded-2xl bg-white p-5 shadow-sm ring-1 ring-ink-900/5">
-                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-forest-800 font-display text-sm font-medium text-moss-300">
-                      {initials(member.name)}
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-forest-800 text-moss-300">
+                      <Icon name="expert" className="h-5 w-5" />
                     </span>
-                    <div>
-                      <p className="font-display text-base font-medium text-forest-900">
-                        {member.name}
-                      </p>
-                      <p className="text-sm text-ink-500">{member.role}</p>
-                    </div>
+                    <p className="font-display text-base font-medium leading-snug text-forest-900">
+                      {formation}
+                    </p>
                   </div>
                 </Reveal>
               ))}

@@ -4,6 +4,7 @@ import Differentials from "@/components/Differentials";
 import About from "@/components/About";
 import Services from "@/components/Services";
 import Sectors from "@/components/Sectors";
+import ClientsCarousel from "@/components/ClientsCarousel";
 import Gallery from "@/components/Gallery";
 import Team from "@/components/Team";
 import Contact from "@/components/Contact";
@@ -19,6 +20,7 @@ export default function Home() {
         <About />
         <Services />
         <Sectors />
+        <ClientsCarousel />
         <Gallery />
         <Team />
         <Contact />

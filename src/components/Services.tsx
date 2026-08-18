@@ -1,8 +1,34 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { services } from "@/data/site";
 import Reveal from "./Reveal";
 
+const PREVIEW_COUNT = 9;
+
+function pickRandom<T>(arr: T[], count: number) {
+  const copy = [...arr];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy.slice(0, count);
+}
+
 export default function Services() {
+  // First render (server + initial client) stays deterministic to avoid a
+  // hydration mismatch; the random 9 are picked right after mount instead.
+  const [preview, setPreview] = useState(() => services.slice(0, PREVIEW_COUNT));
+  const [showAll, setShowAll] = useState(false);
+
+  useEffect(() => {
+    setPreview(pickRandom(services, PREVIEW_COUNT));
+  }, []);
+
+  const list = showAll ? services : preview;
+  const hiddenCount = services.length - PREVIEW_COUNT;
+
   return (
     <section id="servicos" className="bg-forest-950 py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
@@ -14,11 +40,16 @@ export default function Services() {
             <h2 className="mt-4 text-balance font-display text-3xl font-medium leading-tight text-white sm:text-4xl">
               Soluções ambientais completas para cada etapa do seu projeto
             </h2>
+            <p className="mt-3 text-sm leading-relaxed text-white/60">
+              A Avanço Ambiental atua em {services.length} frentes de consultoria
+              ambiental. Veja abaixo uma seleção de {PREVIEW_COUNT} serviços — ou
+              explore a lista completa.
+            </p>
           </div>
         </Reveal>
 
         <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((service, i) => (
+          {list.map((service, i) => (
             <Reveal key={service.title} delay={(i % 3) * 90}>
               <article className="group relative h-80 overflow-hidden rounded-2xl">
                 <Image
@@ -41,6 +72,33 @@ export default function Services() {
             </Reveal>
           ))}
         </div>
+
+        {hiddenCount > 0 && (
+          <div className="mt-12 flex justify-center">
+            <button
+              type="button"
+              onClick={() => setShowAll((v) => !v)}
+              className="inline-flex items-center gap-2 rounded-full border border-white/25 px-7 py-3 text-sm font-semibold text-white transition hover:border-white/50 hover:bg-white/5"
+            >
+              {showAll
+                ? "Ver menos serviços"
+                : `Ver mais serviços (+${hiddenCount})`}
+              <svg
+                viewBox="0 0 20 20"
+                fill="none"
+                className={`h-4 w-4 transition-transform duration-300 ${showAll ? "rotate-180" : ""}`}
+              >
+                <path
+                  d="M5 7.5 10 12.5 15 7.5"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

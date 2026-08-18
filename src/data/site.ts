@@ -67,6 +67,99 @@ export const pillars = [
   { title: "Gestão de Resíduos", icon: "recycle" },
 ];
 
+// Full-detail spotlight blocks — verbatim headlines, intros and complete
+// service checklists for the three specialized field service lines.
+export const specializedBlocks = [
+  {
+    title: "Sondagem de Solo",
+    headline: "Conhecer o solo é o primeiro passo para tomar decisões mais seguras.",
+    intro:
+      "Realizamos investigações do subsolo para obter informações que apoiam projetos, obras, estudos ambientais e decisões de engenharia.",
+    image: "/images/campo-sondagem-solo.jpg",
+    groups: [
+      {
+        subtitle: undefined as string | undefined,
+        items: [
+          "Sondagem de solo",
+          "Investigação geotécnica",
+          "Sondagem para caracterização do subsolo",
+          "Identificação das camadas do terreno",
+          "Determinação do nível d'água, quando aplicável",
+          "Coleta de informações para projetos de engenharia",
+          "Apoio à implantação de obras e estruturas",
+          "Apoio a estudos e projetos ambientais",
+        ],
+      },
+    ],
+  },
+  {
+    title: "Execução Ambiental",
+    headline: "Soluções realizadas diretamente em campo.",
+    intro:
+      "Os serviços são executados de acordo com as características de cada área e observando as autorizações, licenças e requisitos ambientais aplicáveis.",
+    image: "/images/campo-motosserra-03.jpg",
+    groups: [
+      {
+        subtitle: "Revegetação, Recuperação e Proteção Ambiental",
+        items: [
+          "Plantio de Mudas",
+          "Recuperação de Margens",
+          "Implantação de Cercamentos e Estruturas de Proteção Ambiental",
+        ],
+      },
+      {
+        subtitle: "Limpeza e Manejo de Áreas",
+        items: [
+          "Limpeza de Áreas",
+          "Roçada",
+          "Capina",
+          "Manutenção de Áreas Verdes",
+          "Poda de Árvores",
+          "Romaneio de Madeiras",
+        ],
+      },
+      {
+        subtitle: "Serviços em Recursos Hídricos",
+        items: [
+          "Abertura de Lagoas",
+          "Limpeza de Lagoas",
+          "Limpeza de Áreas no Entorno de Corpos Hídricos",
+        ],
+      },
+      {
+        subtitle: "Gestão de Resíduos",
+        items: ["Inventário de Resíduos"],
+      },
+      {
+        subtitle: "Educação e Capacitação Ambiental",
+        items: ["Educação Ambiental", "Treinamento Ambiental", "Palestra Ambiental"],
+      },
+    ],
+  },
+  {
+    title: "Topografia",
+    headline: "Levantamentos que dão precisão às decisões de campo.",
+    intro:
+      "Serviços topográficos para subsidiar projetos ambientais, obras, recuperação de áreas e planejamento de intervenções.",
+    image: "/images/campo-marco-georreferenciamento.jpg",
+    groups: [
+      {
+        subtitle: undefined as string | undefined,
+        items: [
+          "Levantamento topográfico",
+          "Levantamento planialtimétrico",
+          "Levantamento cadastral",
+          "Locação de pontos e estruturas",
+          "Levantamento e demarcação de áreas",
+          "Apoio topográfico para projetos ambientais",
+          "Levantamento de áreas para recuperação ambiental",
+          "Acompanhamento e controle topográfico de intervenções",
+        ],
+      },
+    ],
+  },
+];
+
 export const services = [
   {
     title: "Licenciamento Ambiental",

@@ -5,6 +5,7 @@ import PainPoints from "@/components/PainPoints";
 import About from "@/components/About";
 import Pillars from "@/components/Pillars";
 import Services from "@/components/Services";
+import SpecializedBlocks from "@/components/SpecializedBlocks";
 import Sectors from "@/components/Sectors";
 import ClientsCarousel from "@/components/ClientsCarousel";
 import WhyUs from "@/components/WhyUs";
@@ -29,6 +30,7 @@ export default function Home() {
         <About />
         <Pillars />
         <Services />
+        <SpecializedBlocks />
         <Sectors />
         <ClientsCarousel />
         <WhyUs />

@@ -24,7 +24,7 @@ export default function Gallery() {
   const [active, setActive] = useState<number | null>(null);
 
   return (
-    <section id="galeria" className="bg-forest-950 py-28">
+    <section id="galeria" className="bg-forest-900 py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <Reveal>
           <div className="max-w-2xl">

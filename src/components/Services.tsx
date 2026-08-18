@@ -21,6 +21,7 @@ export default function Services() {
   // hydration mismatch; the random 9 are picked right after mount instead.
   const [preview, setPreview] = useState(() => services.slice(0, PREVIEW_COUNT));
   const [showAll, setShowAll] = useState(false);
+  const [openTitle, setOpenTitle] = useState<string | null>(null);
 
   useEffect(() => {
     setPreview(pickRandom(services, PREVIEW_COUNT));
@@ -51,7 +52,13 @@ export default function Services() {
         <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {list.map((service, i) => (
             <Reveal key={service.title} delay={(i % 3) * 90}>
-              <article className="group relative h-80 overflow-hidden rounded-2xl">
+              <button
+                type="button"
+                onClick={() =>
+                  setOpenTitle((current) => (current === service.title ? null : service.title))
+                }
+                className="group relative block h-80 w-full overflow-hidden rounded-2xl text-left"
+              >
                 <Image
                   src={service.image}
                   alt=""
@@ -64,11 +71,15 @@ export default function Services() {
                   <h3 className="font-display text-xl font-medium text-white">
                     {service.title}
                   </h3>
-                  <p className="mt-2 max-h-0 overflow-hidden text-sm leading-relaxed text-white/75 opacity-0 transition-all duration-500 ease-out group-hover:max-h-32 group-hover:opacity-100">
+                  <p
+                    className={`mt-2 overflow-hidden text-sm leading-relaxed text-white/75 transition-all duration-500 ease-out group-hover:max-h-32 group-hover:opacity-100 ${
+                      openTitle === service.title ? "max-h-32 opacity-100" : "max-h-0 opacity-0"
+                    }`}
+                  >
                     {service.description}
                   </p>
                 </div>
-              </article>
+              </button>
             </Reveal>
           ))}
         </div>

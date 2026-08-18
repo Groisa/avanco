@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { nav, site } from "@/data/site";
 
@@ -24,23 +25,15 @@ export default function Header() {
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
-        <Link href="#inicio" className="flex items-center gap-2.5">
-          <span
-            className={`flex h-9 w-9 items-center justify-center rounded-full ${
-              scrolled ? "bg-forest-700" : "bg-white/15 backdrop-blur"
-            }`}
-          >
-            <svg viewBox="0 0 24 24" className="h-5 w-5 text-moss-300" fill="currentColor">
-              <path d="M12 2C7 2 3 6.5 3 11.5c0 3.6 2.2 6.4 5 8.1V22h2v-2.3a9 9 0 0 0 2-.05V22h2v-2.5c2.8-1.7 5-4.5 5-8 0-5-4-9.5-9-9.5Zm-1 15.9c-3-.7-5-3.4-5-6.4C6 8 8.7 5 12 5c.6 0 1.2.1 1.7.2C11 6.7 9 9.7 9 13c0 1.8.6 3.5 1.6 4.9-.1 0-.4 0-.6 0Zm3-.4C12.6 16.3 12 14.7 12 13c0-3 1.8-5.6 4.3-6.7A6.98 6.98 0 0 1 19 11.5c0 3.4-2.4 6.3-5 7Z" />
-            </svg>
-          </span>
-          <span
-            className={`font-display text-lg font-medium leading-none tracking-tight ${
-              scrolled ? "text-forest-900" : "text-white"
-            }`}
-          >
-            Avanço<span className="block text-xs font-sans font-normal tracking-[0.25em] uppercase opacity-80">Ambiental</span>
-          </span>
+        <Link href="#inicio" className="flex items-center">
+          <Image
+            src={scrolled ? "/brand/logo-dark.png" : "/brand/logo-white.png"}
+            alt="Avanço Ambiental"
+            width={4883}
+            height={1791}
+            priority
+            className="h-9 w-auto sm:h-10"
+          />
         </Link>
 
         <nav className="hidden items-center gap-8 lg:flex">

@@ -22,6 +22,7 @@ export const nav = [
   { label: "Sobre", href: "#sobre" },
   { label: "Serviços", href: "#servicos" },
   { label: "Segmentos", href: "#segmentos" },
+  { label: "Clientes", href: "#clientes" },
   { label: "Galeria", href: "#galeria" },
   { label: "Equipe", href: "#equipe" },
   { label: "Contato", href: "#contato" },

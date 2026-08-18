@@ -5,7 +5,7 @@ import Reveal from "./Reveal";
 
 export default function Sectors() {
   return (
-    <section id="segmentos" className="bg-sand-100 py-28">
+    <section id="segmentos" className="bg-sand-300 py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <Reveal>
           <div className="text-center">

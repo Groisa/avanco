@@ -3,7 +3,7 @@ import Reveal from "./Reveal";
 
 export default function About() {
   return (
-    <section id="sobre" className="bg-sand-100 py-28">
+    <section id="sobre" className="bg-sand-200 py-28">
       <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-14 px-6 lg:grid-cols-2 lg:gap-20 lg:px-10">
         <Reveal>
           <div className="relative">

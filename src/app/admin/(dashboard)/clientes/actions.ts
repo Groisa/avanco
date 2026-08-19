@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 
 export async function updateClient(formData: FormData) {
@@ -16,6 +17,7 @@ export async function updateClient(formData: FormData) {
   });
   revalidatePath("/");
   revalidatePath("/admin/clientes");
+  redirect("/admin/clientes");
 }
 
 export async function createClient(formData: FormData) {
@@ -29,6 +31,7 @@ export async function createClient(formData: FormData) {
   });
   revalidatePath("/");
   revalidatePath("/admin/clientes");
+  redirect("/admin/clientes");
 }
 
 export async function deleteClient(formData: FormData) {
@@ -36,4 +39,5 @@ export async function deleteClient(formData: FormData) {
   await prisma.client.delete({ where: { id } });
   revalidatePath("/");
   revalidatePath("/admin/clientes");
+  redirect("/admin/clientes");
 }

@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { parseGroups } from "@/lib/groups-format";
 
@@ -19,6 +20,7 @@ export async function updateBlock(formData: FormData) {
   });
   revalidatePath("/");
   revalidatePath("/admin/blocos");
+  redirect("/admin/blocos");
 }
 
 export async function createBlock(formData: FormData) {
@@ -34,6 +36,7 @@ export async function createBlock(formData: FormData) {
   });
   revalidatePath("/");
   revalidatePath("/admin/blocos");
+  redirect("/admin/blocos");
 }
 
 export async function deleteBlock(formData: FormData) {
@@ -41,4 +44,5 @@ export async function deleteBlock(formData: FormData) {
   await prisma.specializedBlock.delete({ where: { id } });
   revalidatePath("/");
   revalidatePath("/admin/blocos");
+  redirect("/admin/blocos");
 }

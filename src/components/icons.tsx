@@ -30,7 +30,8 @@ export type IconName =
   | "image"
   | "logout"
   | "user"
-  | "plus";
+  | "plus"
+  | "upload";
 
 const paths: Record<IconName, React.ReactNode> = {
   team: (
@@ -220,6 +221,12 @@ const paths: Record<IconName, React.ReactNode> = {
     </>
   ),
   plus: <path d="M12 5v14M5 12h14" />,
+  upload: (
+    <>
+      <path d="M12 15V4M8 8l4-4 4 4" />
+      <path d="M5 15v3a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-3" />
+    </>
+  ),
 };
 
 export function Icon({

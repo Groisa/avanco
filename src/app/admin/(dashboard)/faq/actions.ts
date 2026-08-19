@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 
 export async function updateFaqItem(formData: FormData) {
@@ -15,6 +16,7 @@ export async function updateFaqItem(formData: FormData) {
   });
   revalidatePath("/");
   revalidatePath("/admin/faq");
+  redirect("/admin/faq");
 }
 
 export async function createFaqItem(formData: FormData) {
@@ -27,6 +29,7 @@ export async function createFaqItem(formData: FormData) {
   });
   revalidatePath("/");
   revalidatePath("/admin/faq");
+  redirect("/admin/faq");
 }
 
 export async function deleteFaqItem(formData: FormData) {
@@ -34,4 +37,5 @@ export async function deleteFaqItem(formData: FormData) {
   await prisma.faqItem.delete({ where: { id } });
   revalidatePath("/");
   revalidatePath("/admin/faq");
+  redirect("/admin/faq");
 }

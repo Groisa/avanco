@@ -9,6 +9,9 @@
 
 export type Group = { subtitle?: string; items: string[] };
 
+export const GROUPS_HELP =
+  'Cada grupo de itens fica separado por uma linha em branco. A primeira linha de um grupo é o subtítulo (opcional); as linhas seguintes começam com "- " e são os itens. Exemplo:\n\nRevegetação\n- Plantio de mudas\n- Recuperação de margens\n\n- Item sem subtítulo';
+
 export function serializeGroups(groups: Group[]): string {
   return groups
     .map((g) => {

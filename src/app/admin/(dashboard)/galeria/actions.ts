@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 
 export async function updateGalleryImage(formData: FormData) {
@@ -15,6 +16,7 @@ export async function updateGalleryImage(formData: FormData) {
   });
   revalidatePath("/");
   revalidatePath("/admin/galeria");
+  redirect("/admin/galeria");
 }
 
 export async function createGalleryImage(formData: FormData) {
@@ -27,6 +29,7 @@ export async function createGalleryImage(formData: FormData) {
   });
   revalidatePath("/");
   revalidatePath("/admin/galeria");
+  redirect("/admin/galeria");
 }
 
 export async function deleteGalleryImage(formData: FormData) {
@@ -34,4 +37,5 @@ export async function deleteGalleryImage(formData: FormData) {
   await prisma.galleryImage.delete({ where: { id } });
   revalidatePath("/");
   revalidatePath("/admin/galeria");
+  redirect("/admin/galeria");
 }

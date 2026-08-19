@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 
 export async function updateSector(formData: FormData) {
@@ -17,6 +18,7 @@ export async function updateSector(formData: FormData) {
   });
   revalidatePath("/");
   revalidatePath("/admin/segmentos");
+  redirect("/admin/segmentos");
 }
 
 export async function createSector(formData: FormData) {
@@ -31,6 +33,7 @@ export async function createSector(formData: FormData) {
   });
   revalidatePath("/");
   revalidatePath("/admin/segmentos");
+  redirect("/admin/segmentos");
 }
 
 export async function deleteSector(formData: FormData) {
@@ -38,4 +41,5 @@ export async function deleteSector(formData: FormData) {
   await prisma.sector.delete({ where: { id } });
   revalidatePath("/");
   revalidatePath("/admin/segmentos");
+  redirect("/admin/segmentos");
 }

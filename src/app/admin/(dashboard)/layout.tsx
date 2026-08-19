@@ -4,6 +4,11 @@ import { Icon } from "@/components/icons";
 import AdminNav from "@/components/admin/AdminNav";
 import { signOut } from "../actions";
 
+// Admin pages always reflect live DB state for the logged-in user —
+// never statically cache them (relying only on per-action revalidatePath
+// left pages stale until something on that exact page triggered a refresh).
+export const dynamic = "force-dynamic";
+
 export default function AdminDashboardLayout({
   children,
 }: {

@@ -10,9 +10,9 @@ export default function AdminDashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-sand-200">
-      <div className="flex min-h-screen">
-        <aside className="hidden w-72 shrink-0 flex-col bg-forest-950 px-5 py-7 lg:flex">
+    <div className="h-screen overflow-hidden bg-sand-200">
+      <div className="flex h-full">
+        <aside className="hidden h-full w-72 shrink-0 flex-col overflow-y-auto bg-forest-950 px-5 py-7 lg:flex">
           <Link href="/admin" className="flex items-center px-1">
             <Image
               src="/brand/logo-white.png"
@@ -55,7 +55,7 @@ export default function AdminDashboardLayout({
           </div>
         </aside>
 
-        <div className="flex-1">
+        <div className="flex h-full flex-1 flex-col overflow-y-auto">
           <div className="flex items-center justify-between border-b border-ink-900/10 bg-white px-6 py-4 lg:hidden">
             <Image src="/brand/logo-dark.png" alt="Avanço Ambiental" width={4883} height={1791} className="h-7 w-auto" />
             <form action={signOut}>

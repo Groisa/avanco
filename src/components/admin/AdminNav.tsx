@@ -14,6 +14,7 @@ const links: { href: string; label: string; icon: IconName; exact?: boolean }[] 
   { href: "/admin/galeria", label: "Galeria", icon: "image" },
   { href: "/admin/equipe", label: "Formações da equipe", icon: "expert" },
   { href: "/admin/faq", label: "Dúvidas frequentes", icon: "help" },
+  { href: "/admin/usuarios", label: "Usuários", icon: "user" },
 ];
 
 export default function AdminNav() {

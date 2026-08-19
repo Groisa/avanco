@@ -28,7 +28,9 @@ export type IconName =
   | "home"
   | "help"
   | "image"
-  | "logout";
+  | "logout"
+  | "user"
+  | "plus";
 
 const paths: Record<IconName, React.ReactNode> = {
   team: (
@@ -211,6 +213,13 @@ const paths: Record<IconName, React.ReactNode> = {
       <path d="M4 12h12M12 8l4 4-4 4" />
     </>
   ),
+  user: (
+    <>
+      <circle cx="12" cy="8" r="3.5" />
+      <path d="M5 20c1-3.5 4-5.5 7-5.5s6 2 7 5.5" />
+    </>
+  ),
+  plus: <path d="M12 5v14M5 12h14" />,
 };
 
 export function Icon({

@@ -1,4 +1,4 @@
-import { clientGains } from "@/data/site";
+import { getClientGains } from "@/lib/content";
 import { Icon, type IconName } from "./icons";
 import Reveal from "./Reveal";
 
@@ -12,7 +12,9 @@ const icons: IconName[] = [
   "clipboard",
 ];
 
-export default function ClientGains() {
+export default async function ClientGains() {
+  const clientGains = await getClientGains();
+
   return (
     <section className="bg-forest-950 py-20">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">

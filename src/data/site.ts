@@ -379,15 +379,15 @@ export const sectors = [
 
 // Placeholder client logo slots — swap the label (or add a `logo` image path)
 // for each real client logo once they're available.
-export const clients = [
-  { name: "Cliente 01" },
-  { name: "Cliente 02" },
-  { name: "Cliente 03" },
-  { name: "Cliente 04" },
-  { name: "Cliente 05" },
-  { name: "Cliente 06" },
-  { name: "Cliente 07" },
-  { name: "Cliente 08" },
+export const clients: { name: string; logo: string | null }[] = [
+  { name: "Cliente 01", logo: null },
+  { name: "Cliente 02", logo: null },
+  { name: "Cliente 03", logo: null },
+  { name: "Cliente 04", logo: null },
+  { name: "Cliente 05", logo: null },
+  { name: "Cliente 06", logo: null },
+  { name: "Cliente 07", logo: null },
+  { name: "Cliente 08", logo: null },
 ];
 
 // Educational backgrounds represented on the team, instead of naming

@@ -1,7 +1,9 @@
-import { process } from "@/data/site";
+import { getProcessSteps } from "@/lib/content";
 import Reveal from "./Reveal";
 
-export default function Process() {
+export default async function Process() {
+  const process = await getProcessSteps();
+
   return (
     <section className="bg-sand-100 py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">

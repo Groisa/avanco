@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { specializedBlocks } from "@/data/site";
+import { getSpecializedBlocks } from "@/lib/content";
 import Reveal from "./Reveal";
 
 function CheckItem({ children }: { children: React.ReactNode }) {
@@ -15,7 +15,9 @@ function CheckItem({ children }: { children: React.ReactNode }) {
   );
 }
 
-export default function SpecializedBlocks() {
+export default async function SpecializedBlocks() {
+  const specializedBlocks = await getSpecializedBlocks();
+
   return (
     <section className="bg-sand-100 py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">

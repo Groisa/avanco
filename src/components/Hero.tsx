@@ -1,21 +1,29 @@
 import Image from "next/image";
-import { site, heroChecklist, heroBadges, services, formations } from "@/data/site";
+import { heroChecklist } from "@/data/site";
+import { getSiteSettings, getHeroBadges, getServices, getFormations } from "@/lib/content";
 import { Icon, type IconName } from "./icons";
 
-const badgeValues: Record<string, string> = {
-  "Formações técnicas na equipe": String(formations.length),
-  "Serviços ambientais prestados": String(services.length),
-  "Atendimento em Minas Gerais": "MG",
-};
+export default async function Hero() {
+  const [{ site, hero }, dbBadges, services, formations] = await Promise.all([
+    getSiteSettings(),
+    getHeroBadges(),
+    getServices(),
+    getFormations(),
+  ]);
 
-export default function Hero() {
+  const badges = dbBadges ?? [
+    { label: "Formações técnicas na equipe", value: String(formations.length), icon: "team" },
+    { label: "Serviços ambientais prestados", value: String(services.length), icon: "check" },
+    { label: "Atendimento em Minas Gerais", value: "MG", icon: "pin" },
+  ];
+
   return (
     <section
       id="inicio"
       className="relative flex min-h-[100svh] items-center overflow-hidden bg-forest-950"
     >
       <Image
-        src="/images/drone-represa-serra.jpg"
+        src={hero.image}
         alt="Vista aérea de represa cercada por serras em Minas Gerais"
         fill
         priority
@@ -29,16 +37,14 @@ export default function Hero() {
         <div>
           <p className="mb-5 flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.3em] text-moss-300">
             <span className="h-px w-8 bg-moss-300" />
-            Conselheiro Lafaiete &mdash; MG
+            {hero.eyebrow}
           </p>
           <h1 className="max-w-2xl text-balance font-display text-4xl font-medium leading-[1.05] sm:text-5xl lg:text-6xl">
-            <span className="text-white">Licenciamento Ambiental</span>{" "}
-            <span className="text-moss-300">sem burocracia.</span>
+            <span className="text-white">{hero.headlineWhite}</span>{" "}
+            <span className="text-moss-300">{hero.headlineGreen}</span>
           </h1>
           <p className="mt-6 max-w-xl text-balance text-lg text-white/80">
-            Seu empreendimento regularizado com segurança, agilidade e
-            suporte técnico especializado &mdash; do estudo ao licenciamento,
-            com uma equipe multidisciplinar ao seu lado.
+            {hero.subtext}
           </p>
 
           <ul className="mt-7 grid grid-cols-1 gap-x-6 gap-y-3 sm:grid-cols-2">
@@ -81,7 +87,7 @@ export default function Hero() {
         </div>
 
         <div className="flex flex-row gap-3 lg:flex-col">
-          {heroBadges.map((badge) => (
+          {badges.map((badge) => (
             <div
               key={badge.label}
               className="flex flex-1 items-center gap-3 rounded-2xl border border-white/15 bg-white/10 px-4 py-3.5 backdrop-blur-sm lg:flex-none"
@@ -91,7 +97,7 @@ export default function Hero() {
               </span>
               <div>
                 <p className="font-display text-lg font-medium leading-none text-white">
-                  {badgeValues[badge.label]}
+                  {badge.value}
                 </p>
                 <p className="mt-1 text-[11px] font-medium uppercase leading-tight tracking-wide text-white/70">
                   {badge.label}

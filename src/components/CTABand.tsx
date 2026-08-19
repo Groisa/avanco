@@ -1,7 +1,9 @@
-import { site } from "@/data/site";
+import { getSiteSettings } from "@/lib/content";
 import { Icon } from "./icons";
 
-export default function CTABand() {
+export default async function CTABand() {
+  const { site } = await getSiteSettings();
+
   return (
     <section className="bg-forest-800">
       <div className="mx-auto flex max-w-7xl flex-col items-center gap-6 px-6 py-14 text-center lg:flex-row lg:justify-between lg:px-10 lg:text-left">

@@ -1,9 +1,11 @@
 import Image from "next/image";
-import { formations } from "@/data/site";
+import { getFormations } from "@/lib/content";
 import { Icon } from "./icons";
 import Reveal from "./Reveal";
 
-export default function Team() {
+export default async function Team() {
+  const formations = await getFormations();
+
   return (
     <section id="equipe" className="bg-sand-100 py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">

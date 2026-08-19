@@ -1,9 +1,11 @@
 import Image from "next/image";
-import { whyUs } from "@/data/site";
+import { getWhyUsItems } from "@/lib/content";
 import Reveal from "./Reveal";
 
-export default function WhyUs() {
-  const [colA, colB] = [whyUs.slice(0, 4), whyUs.slice(4)];
+export default async function WhyUs() {
+  const whyUs = await getWhyUsItems();
+  const half = Math.ceil(whyUs.length / 2);
+  const [colA, colB] = [whyUs.slice(0, half), whyUs.slice(half)];
 
   return (
     <section className="bg-forest-950 py-28">

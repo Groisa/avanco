@@ -1,8 +1,10 @@
-import { pillars } from "@/data/site";
+import { getPillars } from "@/lib/content";
 import { Icon, type IconName } from "./icons";
 import Reveal from "./Reveal";
 
-export default function Pillars() {
+export default async function Pillars() {
+  const pillars = await getPillars();
+
   return (
     <section className="bg-forest-900 py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">

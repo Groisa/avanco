@@ -1,6 +1,8 @@
-import { site } from "@/data/site";
+import { getSiteSettings } from "@/lib/content";
 
-export default function WhatsappFloat() {
+export default async function WhatsappFloat() {
+  const { site } = await getSiteSettings();
+
   return (
     <a
       href={site.whatsapp}

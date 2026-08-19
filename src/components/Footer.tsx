@@ -1,7 +1,10 @@
 import Image from "next/image";
-import { nav, site } from "@/data/site";
+import { nav } from "@/data/site";
+import { getSiteSettings } from "@/lib/content";
 
-export default function Footer() {
+export default async function Footer() {
+  const { site } = await getSiteSettings();
+
   return (
     <footer className="bg-forest-950 border-t border-white/10 py-12">
       <div className="mx-auto flex max-w-7xl flex-col items-center gap-6 px-6 text-center lg:flex-row lg:justify-between lg:px-10 lg:text-left">

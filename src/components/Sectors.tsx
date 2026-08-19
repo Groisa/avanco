@@ -1,9 +1,11 @@
 import Image from "next/image";
-import { sectors } from "@/data/site";
+import { getSectors } from "@/lib/content";
 import { Icon, type IconName } from "./icons";
 import Reveal from "./Reveal";
 
-export default function Sectors() {
+export default async function Sectors() {
+  const sectors = await getSectors();
+
   return (
     <section id="segmentos" className="bg-sand-300 py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">

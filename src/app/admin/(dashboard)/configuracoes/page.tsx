@@ -1,0 +1,88 @@
+import { getSiteSettings } from "@/lib/content";
+import { hasDatabase } from "@/lib/prisma";
+import { Card, Field, Input, Textarea, SaveButton, PageHeader, SetupNotice } from "@/components/admin/ui";
+import { saveSettings } from "./actions";
+
+export default async function ConfiguracoesPage() {
+  const { site, hero } = await getSiteSettings();
+
+  return (
+    <div>
+      <PageHeader
+        title="Configurações e Hero"
+        description="Dados de contato exibidos no site e o texto principal da capa (hero)."
+      />
+      {!hasDatabase && <SetupNotice />}
+
+      <form action={saveSettings} className="space-y-8">
+        <Card>
+          <p className="mb-5 font-display text-base font-medium text-forest-900">
+            Contato e empresa
+          </p>
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+            <Field label="Nome da empresa">
+              <Input name="name" defaultValue={site.name} />
+            </Field>
+            <Field label="Slogan (rodapé)">
+              <Input name="tagline" defaultValue={site.tagline} />
+            </Field>
+            <Field label="Telefone 1">
+              <Input name="phone1" defaultValue={site.phone1} />
+            </Field>
+            <Field label="Telefone 2">
+              <Input name="phone2" defaultValue={site.phone2} />
+            </Field>
+            <Field label="Link do WhatsApp (https://wa.me/55...)">
+              <Input name="whatsapp" defaultValue={site.whatsapp} />
+            </Field>
+            <Field label="E-mail">
+              <Input name="email" defaultValue={site.email} />
+            </Field>
+            <Field label="Endereço — linha 1">
+              <Input name="addressLine1" defaultValue={site.address.line1} />
+            </Field>
+            <Field label="Endereço — linha 2">
+              <Input name="addressLine2" defaultValue={site.address.line2} />
+            </Field>
+            <Field label="Instagram (URL)">
+              <Input name="instagram" defaultValue={site.social.instagram} />
+            </Field>
+            <Field label="LinkedIn (URL)">
+              <Input name="linkedin" defaultValue={site.social.linkedin} />
+            </Field>
+            <Field label="Facebook (URL)">
+              <Input name="facebook" defaultValue={site.social.facebook} />
+            </Field>
+          </div>
+        </Card>
+
+        <Card>
+          <p className="mb-5 font-display text-base font-medium text-forest-900">
+            Capa (Hero)
+          </p>
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+            <Field label="Localização (acima do título)">
+              <Input name="heroEyebrow" defaultValue={hero.eyebrow} />
+            </Field>
+            <Field label="Imagem de fundo (caminho em /public)">
+              <Input name="heroImage" defaultValue={hero.image} />
+            </Field>
+            <Field label="Título — parte branca">
+              <Input name="heroHeadlineWhite" defaultValue={hero.headlineWhite} />
+            </Field>
+            <Field label="Título — parte verde">
+              <Input name="heroHeadlineGreen" defaultValue={hero.headlineGreen} />
+            </Field>
+          </div>
+          <div className="mt-5">
+            <Field label="Texto de apoio">
+              <Textarea name="heroSubtext" rows={3} defaultValue={hero.subtext} />
+            </Field>
+          </div>
+        </Card>
+
+        <SaveButton>Salvar configurações</SaveButton>
+      </form>
+    </div>
+  );
+}

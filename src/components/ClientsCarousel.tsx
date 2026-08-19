@@ -1,9 +1,11 @@
-import { clients } from "@/data/site";
+import Image from "next/image";
+import { getClients } from "@/lib/content";
 import Reveal from "./Reveal";
 
-// Placeholder slots — replace `clients` in src/data/site.ts with the real
-// client logos/names once they're available and this carousel updates itself.
-export default function ClientsCarousel() {
+// Placeholder slots by default — add real client logos/names via the admin
+// panel (/admin/clientes) and this carousel updates automatically.
+export default async function ClientsCarousel() {
+  const clients = await getClients();
   const track = [...clients, ...clients];
 
   return (
@@ -26,25 +28,28 @@ export default function ClientsCarousel() {
               key={`${client.name}-${i}`}
               className="mx-4 flex h-24 w-52 shrink-0 items-center justify-center gap-3 rounded-2xl border border-dashed border-ink-900/15 bg-white/70 px-6 text-ink-500 sm:w-60"
             >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                className="h-6 w-6 shrink-0 text-forest-600"
-              >
-                <path
-                  d="M12 3c2.8 3 4.5 6 4.5 9a4.5 4.5 0 1 1-9 0c0-3 1.7-6 4.5-9Z"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M12 12v8"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                />
-              </svg>
-              <span className="text-sm font-medium">{client.name}</span>
+              {client.logo ? (
+                <div className="relative h-10 w-full">
+                  <Image src={client.logo} alt={client.name} fill className="object-contain" />
+                </div>
+              ) : (
+                <>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    className="h-6 w-6 shrink-0 text-forest-600"
+                  >
+                    <path
+                      d="M12 3c2.8 3 4.5 6 4.5 9a4.5 4.5 0 1 1-9 0c0-3 1.7-6 4.5-9Z"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinejoin="round"
+                    />
+                    <path d="M12 12v8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                  </svg>
+                  <span className="text-sm font-medium">{client.name}</span>
+                </>
+              )}
             </div>
           ))}
         </div>

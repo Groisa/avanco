@@ -1,0 +1,136 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// Singleton row (id always 1) holding global site info, hero copy and contact details.
+model SiteSettings {
+  id                Int      @id @default(1)
+  name              String   @default("Avanço Ambiental")
+  tagline           String   @default("Consultoria ambiental com disponibilidade, proximidade e eficiência")
+  phone1            String   @default("")
+  phone2            String   @default("")
+  whatsapp          String   @default("")
+  email             String   @default("")
+  addressLine1      String   @default("")
+  addressLine2      String   @default("")
+  instagram         String   @default("")
+  linkedin          String   @default("")
+  facebook          String   @default("")
+  heroEyebrow       String   @default("Conselheiro Lafaiete — MG")
+  heroHeadlineWhite String   @default("Licenciamento Ambiental")
+  heroHeadlineGreen String   @default("sem burocracia.")
+  heroSubtext       String   @default("")
+  heroImage         String   @default("/images/drone-represa-serra.jpg")
+  updatedAt         DateTime @updatedAt
+}
+
+model Service {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  image       String
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Sector {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  image       String
+  icon        String   @default("leaf")
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Formation {
+  id        String   @id @default(cuid())
+  name      String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+}
+
+model Client {
+  id        String   @id @default(cuid())
+  name      String
+  logo      String?
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+}
+
+model GalleryImage {
+  id        String   @id @default(cuid())
+  src       String
+  alt       String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+}
+
+model FaqItem {
+  id        String   @id @default(cuid())
+  question  String
+  answer    String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+}
+
+// Rich full-detail blocks (Sondagem de Solo, Execução Ambiental, Topografia...).
+// `groups` is [{ subtitle?: string, items: string[] }] stored as JSON since each
+// block has a variable number of sub-groups with their own checklist items.
+model SpecializedBlock {
+  id        String   @id @default(cuid())
+  title     String
+  headline  String
+  intro     String
+  image     String
+  order     Int      @default(0)
+  groups    Json
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Pillar {
+  id    String @id @default(cuid())
+  title String
+  icon  String @default("leaf")
+  order Int    @default(0)
+}
+
+model HeroBadge {
+  id     String @id @default(cuid())
+  label  String
+  value  String
+  icon   String @default("check")
+  order  Int    @default(0)
+}
+
+model WhyUsItem {
+  id    String @id @default(cuid())
+  text  String
+  order Int    @default(0)
+}
+
+model ProcessStep {
+  id          String @id @default(cuid())
+  step        String
+  title       String
+  description String
+  order       Int    @default(0)
+}
+
+model ClientGain {
+  id    String @id @default(cuid())
+  label String
+  icon  String @default("check")
+  order Int    @default(0)
+}

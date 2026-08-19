@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import StructuredData from "@/components/StructuredData";
 import Hero from "@/components/Hero";
 import Differentials from "@/components/Differentials";
 import PainPoints from "@/components/PainPoints";
@@ -22,6 +23,7 @@ import Footer from "@/components/Footer";
 export default function Home() {
   return (
     <>
+      <StructuredData />
       <Header />
       <main>
         <Hero />

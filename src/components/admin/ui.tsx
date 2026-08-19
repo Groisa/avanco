@@ -1,3 +1,7 @@
+"use client";
+
+import { useId } from "react";
+
 export function Card({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
     <div className={`rounded-2xl bg-white p-6 shadow-sm ring-1 ring-ink-900/5 ${className}`}>
@@ -38,8 +42,6 @@ export function Select(props: React.SelectHTMLAttributes<HTMLSelectElement>) {
   return <select {...props} className={`${inputClass} ${props.className ?? ""}`} />;
 }
 
-let pickerId = 0;
-
 export function ImagePicker({
   name,
   defaultValue,
@@ -49,7 +51,7 @@ export function ImagePicker({
   defaultValue: string;
   images: string[];
 }) {
-  const listId = `img-list-${name}-${pickerId++}`;
+  const listId = useId();
   return (
     <div className="flex items-center gap-3">
       {defaultValue && (

@@ -24,7 +24,11 @@ export type IconName =
   | "heart"
   | "expert"
   | "paper"
-  | "clipboard";
+  | "clipboard"
+  | "home"
+  | "help"
+  | "image"
+  | "logout";
 
 const paths: Record<IconName, React.ReactNode> = {
   team: (
@@ -178,6 +182,33 @@ const paths: Record<IconName, React.ReactNode> = {
       <rect x="6" y="4" width="12" height="17" rx="2" />
       <rect x="9" y="2" width="6" height="4" rx="1" />
       <path d="M9 12h6M9 16h6" />
+    </>
+  ),
+  home: (
+    <>
+      <path d="M4 11 12 4l8 7" />
+      <path d="M6 9.5V20h12V9.5" />
+      <path d="M10 20v-6h4v6" />
+    </>
+  ),
+  help: (
+    <>
+      <circle cx="12" cy="12" r="8.5" />
+      <path d="M9.3 9.3a2.7 2.7 0 1 1 3.8 2.5c-.7.4-1.1.9-1.1 1.7v.3" />
+      <path d="M12 17h.01" />
+    </>
+  ),
+  image: (
+    <>
+      <rect x="3" y="4" width="18" height="16" rx="2" />
+      <circle cx="8.5" cy="9.5" r="1.5" />
+      <path d="M21 16l-5.5-5.5a1.5 1.5 0 0 0-2.1 0L4 19" />
+    </>
+  ),
+  logout: (
+    <>
+      <path d="M13 4h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-4" />
+      <path d="M4 12h12M12 8l4 4-4 4" />
     </>
   ),
 };

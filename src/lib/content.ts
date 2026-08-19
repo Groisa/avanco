@@ -3,7 +3,8 @@ import * as staticData from "@/data/site";
 
 // Every getter below is DB-first: once Supabase is connected and seeded, it
 // serves live rows. Until then (or if a query fails), it falls back to the
-// static data in src/data/site.ts so the public site never breaks.
+// static data in src/data/site.ts so the public site never breaks. Failures
+// are logged (not swallowed) so they show up in Vercel's function logs.
 
 export async function getSiteSettings() {
   if (hasDatabase) {
@@ -35,8 +36,8 @@ export async function getSiteSettings() {
           },
         };
       }
-    } catch {
-      // fall through to static
+    } catch (e) {
+      console.error("[content] getSiteSettings failed:", e);
     }
   }
   return {
@@ -57,7 +58,9 @@ export async function getServices() {
     try {
       const rows = await prisma.service.findMany({ orderBy: { order: "asc" } });
       if (rows.length) return rows;
-    } catch {}
+    } catch (e) {
+      console.error("[content] getServices failed:", e);
+    }
   }
   return staticData.services;
 }
@@ -67,7 +70,9 @@ export async function getSectors() {
     try {
       const rows = await prisma.sector.findMany({ orderBy: { order: "asc" } });
       if (rows.length) return rows;
-    } catch {}
+    } catch (e) {
+      console.error("[content] getSectors failed:", e);
+    }
   }
   return staticData.sectors;
 }
@@ -77,7 +82,9 @@ export async function getFormations() {
     try {
       const rows = await prisma.formation.findMany({ orderBy: { order: "asc" } });
       if (rows.length) return rows.map((r) => r.name);
-    } catch {}
+    } catch (e) {
+      console.error("[content] getFormations failed:", e);
+    }
   }
   return staticData.formations;
 }
@@ -87,7 +94,9 @@ export async function getClients() {
     try {
       const rows = await prisma.client.findMany({ orderBy: { order: "asc" } });
       if (rows.length) return rows;
-    } catch {}
+    } catch (e) {
+      console.error("[content] getClients failed:", e);
+    }
   }
   return staticData.clients;
 }
@@ -97,7 +106,9 @@ export async function getGalleryImages() {
     try {
       const rows = await prisma.galleryImage.findMany({ orderBy: { order: "asc" } });
       if (rows.length) return rows;
-    } catch {}
+    } catch (e) {
+      console.error("[content] getGalleryImages failed:", e);
+    }
   }
   return staticData.galleryImages;
 }
@@ -107,7 +118,9 @@ export async function getFaqItems() {
     try {
       const rows = await prisma.faqItem.findMany({ orderBy: { order: "asc" } });
       if (rows.length) return rows;
-    } catch {}
+    } catch (e) {
+      console.error("[content] getFaqItems failed:", e);
+    }
   }
   return staticData.faq;
 }
@@ -127,7 +140,9 @@ export async function getSpecializedBlocks() {
           groups: r.groups as unknown as SpecializedGroup[],
         }));
       }
-    } catch {}
+    } catch (e) {
+      console.error("[content] getSpecializedBlocks failed:", e);
+    }
   }
   return staticData.specializedBlocks;
 }
@@ -137,7 +152,9 @@ export async function getPillars() {
     try {
       const rows = await prisma.pillar.findMany({ orderBy: { order: "asc" } });
       if (rows.length) return rows.map((r) => ({ title: r.title, icon: r.icon }));
-    } catch {}
+    } catch (e) {
+      console.error("[content] getPillars failed:", e);
+    }
   }
   return staticData.pillars;
 }
@@ -147,7 +164,9 @@ export async function getHeroBadges() {
     try {
       const rows = await prisma.heroBadge.findMany({ orderBy: { order: "asc" } });
       if (rows.length) return rows.map((r) => ({ label: r.label, value: r.value, icon: r.icon }));
-    } catch {}
+    } catch (e) {
+      console.error("[content] getHeroBadges failed:", e);
+    }
   }
   return null; // Hero.tsx computes default badge values from live counts
 }
@@ -157,7 +176,9 @@ export async function getWhyUsItems() {
     try {
       const rows = await prisma.whyUsItem.findMany({ orderBy: { order: "asc" } });
       if (rows.length) return rows.map((r) => r.text);
-    } catch {}
+    } catch (e) {
+      console.error("[content] getWhyUsItems failed:", e);
+    }
   }
   return staticData.whyUs;
 }
@@ -167,7 +188,9 @@ export async function getProcessSteps() {
     try {
       const rows = await prisma.processStep.findMany({ orderBy: { order: "asc" } });
       if (rows.length) return rows;
-    } catch {}
+    } catch (e) {
+      console.error("[content] getProcessSteps failed:", e);
+    }
   }
   return staticData.process;
 }
@@ -177,7 +200,9 @@ export async function getClientGains() {
     try {
       const rows = await prisma.clientGain.findMany({ orderBy: { order: "asc" } });
       if (rows.length) return rows.map((r) => r.label);
-    } catch {}
+    } catch (e) {
+      console.error("[content] getClientGains failed:", e);
+    }
   }
   return staticData.clientGains;
 }

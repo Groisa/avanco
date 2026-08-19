@@ -1,12 +1,24 @@
-import { getServices } from "@/lib/content";
-import { hasDatabase } from "@/lib/prisma";
-import { PageHeader, SetupNotice, CreateLink, ListRow, EmptyState } from "@/components/admin/ui";
+import { prisma, hasDatabase } from "@/lib/prisma";
+import { PageHeader, SetupNotice, ErrorNotice, CreateLink, ListRow, EmptyState } from "@/components/admin/ui";
 import { deleteService } from "./actions";
 
-type ServiceRow = { id?: string; title: string; description: string; image: string; order?: number };
-
 export default async function ServicosPage() {
-  const services = (await getServices()) as ServiceRow[];
+  if (!hasDatabase) {
+    return (
+      <div>
+        <PageHeader title="Serviços" action={<CreateLink href="/admin/servicos/novo">Novo serviço</CreateLink>} />
+        <SetupNotice />
+      </div>
+    );
+  }
+
+  let services: { id: string; title: string; description: string; image: string }[] = [];
+  let error: string | null = null;
+  try {
+    services = await prisma.service.findMany({ orderBy: { order: "asc" } });
+  } catch (e) {
+    error = e instanceof Error ? e.message : String(e);
+  }
 
   return (
     <div>
@@ -15,16 +27,16 @@ export default async function ServicosPage() {
         description={`${services.length} serviços no catálogo. Aparecem em destaque (9 aleatórios) na página, com "ver mais" para o restante.`}
         action={<CreateLink href="/admin/servicos/novo">Novo serviço</CreateLink>}
       />
-      {!hasDatabase && <SetupNotice />}
+      {error && <ErrorNotice message={error} />}
 
-      {services.length === 0 ? (
+      {!error && services.length === 0 ? (
         <EmptyState>Nenhum serviço cadastrado ainda.</EmptyState>
       ) : (
         <div className="space-y-3">
           {services.map((service) => (
             <ListRow
-              key={service.id ?? service.title}
-              href={`/admin/servicos/${service.id ?? ""}`}
+              key={service.id}
+              href={`/admin/servicos/${service.id}`}
               image={service.image}
               title={service.title}
               subtitle={service.description}

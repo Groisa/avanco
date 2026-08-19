@@ -274,3 +274,21 @@ export function SetupNotice() {
     </div>
   );
 }
+
+export function ErrorNotice({ message }: { message: string }) {
+  return (
+    <div className="mb-8 flex items-start gap-3 rounded-2xl border border-clay-600/30 bg-clay-500/10 p-4">
+      <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-clay-600/20 text-clay-600">
+        <Icon name="x" className="h-4 w-4" />
+      </span>
+      <div>
+        <p className="text-sm font-semibold text-clay-600">
+          Não foi possível carregar os dados do banco.
+        </p>
+        <p className="mt-1 break-all font-mono text-xs leading-relaxed text-clay-600">
+          {message}
+        </p>
+      </div>
+    </div>
+  );
+}

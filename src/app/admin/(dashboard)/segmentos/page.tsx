@@ -1,12 +1,24 @@
-import { getSectors } from "@/lib/content";
-import { hasDatabase } from "@/lib/prisma";
-import { PageHeader, SetupNotice, CreateLink, ListRow, EmptyState } from "@/components/admin/ui";
+import { prisma, hasDatabase } from "@/lib/prisma";
+import { PageHeader, SetupNotice, ErrorNotice, CreateLink, ListRow, EmptyState } from "@/components/admin/ui";
 import { deleteSector } from "./actions";
 
-type SectorRow = { id?: string; title: string; description: string; image: string; icon?: string; order?: number };
-
 export default async function SegmentosPage() {
-  const sectors = (await getSectors()) as SectorRow[];
+  if (!hasDatabase) {
+    return (
+      <div>
+        <PageHeader title="Segmentos" action={<CreateLink href="/admin/segmentos/novo">Novo segmento</CreateLink>} />
+        <SetupNotice />
+      </div>
+    );
+  }
+
+  let sectors: { id: string; title: string; description: string; image: string }[] = [];
+  let error: string | null = null;
+  try {
+    sectors = await prisma.sector.findMany({ orderBy: { order: "asc" } });
+  } catch (e) {
+    error = e instanceof Error ? e.message : String(e);
+  }
 
   return (
     <div>
@@ -15,16 +27,16 @@ export default async function SegmentosPage() {
         description="Setores econômicos atendidos, exibidos com foto e ícone."
         action={<CreateLink href="/admin/segmentos/novo">Novo segmento</CreateLink>}
       />
-      {!hasDatabase && <SetupNotice />}
+      {error && <ErrorNotice message={error} />}
 
-      {sectors.length === 0 ? (
+      {!error && sectors.length === 0 ? (
         <EmptyState>Nenhum segmento cadastrado ainda.</EmptyState>
       ) : (
         <div className="space-y-3">
           {sectors.map((sector) => (
             <ListRow
-              key={sector.id ?? sector.title}
-              href={`/admin/segmentos/${sector.id ?? ""}`}
+              key={sector.id}
+              href={`/admin/segmentos/${sector.id}`}
               image={sector.image}
               title={sector.title}
               subtitle={sector.description}

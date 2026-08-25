@@ -26,10 +26,10 @@ export default async function ClientsCarousel() {
           {track.map((client, i) => (
             <div
               key={`${client.name}-${i}`}
-              className="mx-4 flex h-24 w-52 shrink-0 items-center justify-center gap-3 rounded-2xl border border-dashed border-ink-900/15 bg-white/70 px-6 text-ink-500 sm:w-60"
+              className="mx-4 flex h-28 w-56 shrink-0 items-center justify-center gap-3 rounded-2xl border border-dashed border-ink-900/15 bg-white/70 px-6 py-5 text-ink-500 sm:w-64"
             >
               {client.logo ? (
-                <div className="relative h-10 w-full">
+                <div className="relative h-full w-full">
                   <Image src={client.logo} alt={client.name} fill className="object-contain" />
                 </div>
               ) : (

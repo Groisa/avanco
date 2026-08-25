@@ -10,6 +10,7 @@ const sections: { href: string; label: string; description: string; icon: IconNa
   { href: "/admin/segmentos", label: "Segmentos", description: "Setores atendidos (Indústrias, Mineração, etc).", icon: "map" },
   { href: "/admin/clientes", label: "Clientes", description: "Carrossel de logos de clientes.", icon: "team" },
   { href: "/admin/galeria", label: "Galeria", description: "Fotos de campo e aéreas.", icon: "image" },
+  { href: "/admin/destaques", label: "Faixa de destaques", description: "As 5 imagens com título entre as seções do site.", icon: "image" },
   { href: "/admin/equipe", label: "Formações da equipe", description: "Formações técnicas exibidas na seção Equipe.", icon: "expert" },
   { href: "/admin/faq", label: "Dúvidas frequentes", description: "Perguntas e respostas do FAQ.", icon: "help" },
   { href: "/admin/usuarios", label: "Usuários", description: "Quem pode fazer login no painel administrativo.", icon: "user" },

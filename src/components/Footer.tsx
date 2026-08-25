@@ -3,14 +3,14 @@ import { nav } from "@/data/site";
 import { getSiteSettings } from "@/lib/content";
 
 export default async function Footer() {
-  const { site } = await getSiteSettings();
+  const { site, footerLogo } = await getSiteSettings();
 
   return (
     <footer className="bg-forest-950 border-t border-white/10 py-12">
       <div className="mx-auto flex max-w-7xl flex-col items-center gap-6 px-6 text-center lg:flex-row lg:justify-between lg:px-10 lg:text-left">
         <div className="flex flex-col items-center lg:items-start">
           <Image
-            src="/brand/logo-white.png"
+            src={footerLogo}
             alt={site.name}
             width={4883}
             height={1791}

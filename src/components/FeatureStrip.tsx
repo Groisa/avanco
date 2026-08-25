@@ -1,7 +1,9 @@
 import Image from "next/image";
-import { featureStrip } from "@/data/site";
+import { getFeatureStrip } from "@/lib/content";
 
-export default function FeatureStrip() {
+export default async function FeatureStrip() {
+  const featureStrip = await getFeatureStrip();
+
   return (
     <section className="bg-forest-950">
       <div className="grid grid-cols-2 sm:grid-cols-5">

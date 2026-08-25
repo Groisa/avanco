@@ -1,10 +1,12 @@
 import { getSiteSettings } from "@/lib/content";
 import { hasDatabase } from "@/lib/prisma";
-import { Card, Field, Input, Textarea, SaveButton, PageHeader, SetupNotice } from "@/components/admin/ui";
+import { getAvailableImages } from "@/lib/images";
+import { Card, Field, Input, Textarea, ImagePicker, SaveButton, PageHeader, SetupNotice } from "@/components/admin/ui";
 import { saveSettings } from "./actions";
 
 export default async function ConfiguracoesPage() {
-  const { site, hero } = await getSiteSettings();
+  const { site, hero, teamImage, footerLogo } = await getSiteSettings();
+  const images = getAvailableImages();
 
   return (
     <div>
@@ -64,8 +66,8 @@ export default async function ConfiguracoesPage() {
             <Field label="Localização (acima do título)">
               <Input name="heroEyebrow" defaultValue={hero.eyebrow} />
             </Field>
-            <Field label="Imagem de fundo (caminho em /public)">
-              <Input name="heroImage" defaultValue={hero.image} />
+            <Field label="Imagem de fundo">
+              <ImagePicker name="heroImage" defaultValue={hero.image} images={images} />
             </Field>
             <Field label="Título — parte branca">
               <Input name="heroHeadlineWhite" defaultValue={hero.headlineWhite} />
@@ -77,6 +79,20 @@ export default async function ConfiguracoesPage() {
           <div className="mt-5">
             <Field label="Texto de apoio">
               <Textarea name="heroSubtext" rows={3} defaultValue={hero.subtext} />
+            </Field>
+          </div>
+        </Card>
+
+        <Card>
+          <p className="mb-5 font-display text-base font-medium text-forest-900">
+            Outras imagens do site
+          </p>
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+            <Field label="Foto da seção Equipe">
+              <ImagePicker name="teamImage" defaultValue={teamImage} images={images} />
+            </Field>
+            <Field label="Logo do rodapé">
+              <ImagePicker name="footerLogo" defaultValue={footerLogo} images={images} />
             </Field>
           </div>
         </Card>

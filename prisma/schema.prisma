@@ -29,7 +29,16 @@ model SiteSettings {
   heroHeadlineGreen String   @default("sem burocracia.")
   heroSubtext       String   @default("")
   heroImage         String   @default("/images/drone-represa-serra.jpg")
+  teamImage         String   @default("/images/equipe-campo-02.jpg")
+  footerLogo        String   @default("/brand/logo-white.png")
   updatedAt         DateTime @updatedAt
+}
+
+model FeatureStripItem {
+  id    String @id @default(cuid())
+  title String
+  image String
+  order Int    @default(0)
 }
 
 model Service {

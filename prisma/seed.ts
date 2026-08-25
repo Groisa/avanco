@@ -103,6 +103,12 @@ async function main() {
     });
   }
 
+  if ((await prisma.featureStripItem.count()) === 0) {
+    await prisma.featureStripItem.createMany({
+      data: data.featureStrip.map((f, order) => ({ ...f, order })),
+    });
+  }
+
   if ((await prisma.clientGain.count()) === 0) {
     const icons = ["shield", "clock", "risk", "heart", "expert", "paper", "clipboard"];
     await prisma.clientGain.createMany({

@@ -26,6 +26,8 @@ export async function saveSettings(formData: FormData) {
       heroHeadlineGreen: get("heroHeadlineGreen"),
       heroSubtext: get("heroSubtext"),
       heroImage: get("heroImage"),
+      teamImage: get("teamImage"),
+      footerLogo: get("footerLogo"),
     },
     update: {
       name: get("name"),
@@ -44,6 +46,8 @@ export async function saveSettings(formData: FormData) {
       heroHeadlineGreen: get("heroHeadlineGreen"),
       heroSubtext: get("heroSubtext"),
       heroImage: get("heroImage"),
+      teamImage: get("teamImage"),
+      footerLogo: get("footerLogo"),
     },
   });
 

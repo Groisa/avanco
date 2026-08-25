@@ -34,6 +34,8 @@ export async function getSiteSettings() {
             subtext: row.heroSubtext,
             image: row.heroImage,
           },
+          teamImage: row.teamImage,
+          footerLogo: row.footerLogo,
         };
       }
     } catch (e) {
@@ -50,6 +52,8 @@ export async function getSiteSettings() {
         "Seu empreendimento regularizado com segurança, agilidade e suporte técnico especializado — do estudo ao licenciamento, com uma equipe multidisciplinar ao seu lado.",
       image: "/images/drone-represa-serra.jpg",
     },
+    teamImage: "/images/equipe-campo-02.jpg",
+    footerLogo: "/brand/logo-white.png",
   };
 }
 
@@ -193,6 +197,18 @@ export async function getProcessSteps() {
     }
   }
   return staticData.process;
+}
+
+export async function getFeatureStrip() {
+  if (hasDatabase) {
+    try {
+      const rows = await prisma.featureStripItem.findMany({ orderBy: { order: "asc" } });
+      if (rows.length) return rows;
+    } catch (e) {
+      console.error("[content] getFeatureStrip failed:", e);
+    }
+  }
+  return staticData.featureStrip;
 }
 
 export async function getClientGains() {

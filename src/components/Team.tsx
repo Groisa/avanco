@@ -1,10 +1,10 @@
 import Image from "next/image";
-import { getFormations } from "@/lib/content";
+import { getFormations, getSiteSettings } from "@/lib/content";
 import { Icon } from "./icons";
 import Reveal from "./Reveal";
 
 export default async function Team() {
-  const formations = await getFormations();
+  const [formations, { teamImage }] = await Promise.all([getFormations(), getSiteSettings()]);
 
   return (
     <section id="equipe" className="bg-sand-100 py-28">
@@ -13,7 +13,7 @@ export default async function Team() {
           <Reveal>
             <div className="relative aspect-[5/4] w-full overflow-hidden rounded-3xl">
               <Image
-                src="/images/equipe-campo-02.jpg"
+                src={teamImage}
                 alt="Equipe da Avanço Ambiental em campo"
                 fill
                 sizes="(min-width: 1024px) 45vw, 90vw"

@@ -1,7 +1,16 @@
-import { getServices } from "@/lib/content";
+import { getServices, getSiteSettings } from "@/lib/content";
 import ServicesClient from "./ServicesClient";
 
 export default async function Services() {
-  const services = await getServices();
-  return <ServicesClient services={services} />;
+  const [services, { servicesEyebrow, servicesHeadline }] = await Promise.all([
+    getServices(),
+    getSiteSettings(),
+  ]);
+  return (
+    <ServicesClient
+      services={services}
+      eyebrow={servicesEyebrow}
+      headline={servicesHeadline}
+    />
+  );
 }

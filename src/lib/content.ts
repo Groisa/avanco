@@ -36,6 +36,8 @@ export async function getSiteSettings() {
           },
           teamImage: row.teamImage,
           footerLogo: row.footerLogo,
+          servicesEyebrow: row.servicesEyebrow,
+          servicesHeadline: row.servicesHeadline,
         };
       }
     } catch (e) {
@@ -54,6 +56,8 @@ export async function getSiteSettings() {
     },
     teamImage: "/images/equipe-campo-02.jpg",
     footerLogo: "/brand/logo-white.png",
+    servicesEyebrow: "Serviços",
+    servicesHeadline: "Soluções ambientais completas para cada etapa do seu projeto",
   };
 }
 

@@ -5,7 +5,7 @@ import { Card, Field, Input, Textarea, ImagePicker, SaveButton, PageHeader, Setu
 import { saveSettings } from "./actions";
 
 export default async function ConfiguracoesPage() {
-  const { site, hero, teamImage, footerLogo } = await getSiteSettings();
+  const { site, hero, teamImage, footerLogo, servicesEyebrow, servicesHeadline } = await getSiteSettings();
   const images = getAvailableImages();
 
   return (
@@ -79,6 +79,20 @@ export default async function ConfiguracoesPage() {
           <div className="mt-5">
             <Field label="Texto de apoio">
               <Textarea name="heroSubtext" rows={3} defaultValue={hero.subtext} />
+            </Field>
+          </div>
+        </Card>
+
+        <Card>
+          <p className="mb-5 font-display text-base font-medium text-forest-900">
+            Seção Serviços
+          </p>
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+            <Field label="Localização (acima do título)">
+              <Input name="servicesEyebrow" defaultValue={servicesEyebrow} />
+            </Field>
+            <Field label="Título da seção">
+              <Input name="servicesHeadline" defaultValue={servicesHeadline} />
             </Field>
           </div>
         </Card>

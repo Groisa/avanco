@@ -31,6 +31,8 @@ model SiteSettings {
   heroImage         String   @default("/images/drone-represa-serra.jpg")
   teamImage         String   @default("/images/equipe-campo-02.jpg")
   footerLogo        String   @default("/brand/logo-white.png")
+  servicesEyebrow   String   @default("Serviços")
+  servicesHeadline  String   @default("Soluções ambientais completas para cada etapa do seu projeto")
   updatedAt         DateTime @updatedAt
 }
 

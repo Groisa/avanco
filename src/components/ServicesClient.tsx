@@ -17,7 +17,15 @@ function pickRandom<T>(arr: T[], count: number) {
   return copy.slice(0, count);
 }
 
-export default function ServicesClient({ services }: { services: ServiceItem[] }) {
+export default function ServicesClient({
+  services,
+  eyebrow,
+  headline,
+}: {
+  services: ServiceItem[];
+  eyebrow: string;
+  headline: string;
+}) {
   // First render (server + initial client) stays deterministic to avoid a
   // hydration mismatch; the random 9 are picked right after mount instead.
   const [preview, setPreview] = useState(() => services.slice(0, PREVIEW_COUNT));
@@ -37,10 +45,10 @@ export default function ServicesClient({ services }: { services: ServiceItem[] }
         <Reveal>
           <div className="max-w-2xl">
             <p className="text-sm font-semibold uppercase tracking-[0.3em] text-moss-300">
-              Serviços
+              {eyebrow}
             </p>
             <h2 className="mt-4 text-balance font-display text-3xl font-medium leading-tight text-white sm:text-4xl">
-              Soluções ambientais completas para cada etapa do seu projeto
+              {headline}
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-white/60">
               A Avanço Ambiental atua em {services.length} frentes de consultoria

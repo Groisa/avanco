@@ -28,6 +28,8 @@ export async function saveSettings(formData: FormData) {
       heroImage: get("heroImage"),
       teamImage: get("teamImage"),
       footerLogo: get("footerLogo"),
+      servicesEyebrow: get("servicesEyebrow"),
+      servicesHeadline: get("servicesHeadline"),
     },
     update: {
       name: get("name"),
@@ -48,6 +50,8 @@ export async function saveSettings(formData: FormData) {
       heroImage: get("heroImage"),
       teamImage: get("teamImage"),
       footerLogo: get("footerLogo"),
+      servicesEyebrow: get("servicesEyebrow"),
+      servicesHeadline: get("servicesHeadline"),
     },
   });
 

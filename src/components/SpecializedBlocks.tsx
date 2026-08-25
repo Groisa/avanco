@@ -32,38 +32,32 @@ export default async function SpecializedBlocks() {
           </div>
         </Reveal>
 
-        <div className="mt-16 space-y-20">
-          {specializedBlocks.map((block, i) => {
-            const reverse = i % 2 === 1;
-            return (
-              <div
-                key={block.title}
-                className={`grid grid-cols-1 items-start gap-10 lg:grid-cols-2 lg:gap-16 ${reverse ? "lg:[&>*:first-child]:order-2" : ""}`}
-              >
-                <Reveal>
-                  <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl">
-                    <Image
-                      src={block.image}
-                      alt={block.title}
-                      fill
-                      sizes="(min-width: 1024px) 45vw, 90vw"
-                      className="object-cover"
-                    />
-                  </div>
-                </Reveal>
+        <div className="mt-16 space-y-14">
+          {specializedBlocks.map((block) => (
+            <Reveal key={block.title}>
+              <div className="overflow-hidden rounded-3xl bg-white shadow-sm shadow-ink-900/5 ring-1 ring-ink-900/5">
+                <div className="relative aspect-[16/9] w-full sm:aspect-[2.4/1]">
+                  <Image
+                    src={block.image}
+                    alt={block.title}
+                    fill
+                    sizes="(min-width: 1024px) 1024px, 100vw"
+                    className="object-cover"
+                  />
+                </div>
 
-                <Reveal delay={100}>
+                <div className="p-8 sm:p-10 lg:p-12">
                   <p className="text-sm font-semibold uppercase tracking-[0.25em] text-moss-400">
                     {block.title}
                   </p>
                   <h3 className="mt-3 text-balance font-display text-2xl font-medium leading-snug text-forest-900 sm:text-3xl">
                     {block.headline}
                   </h3>
-                  <p className="mt-4 text-base leading-relaxed text-ink-500">
+                  <p className="mt-4 max-w-3xl text-base leading-relaxed text-ink-500">
                     {block.intro}
                   </p>
 
-                  <div className="mt-8 space-y-6">
+                  <div className="mt-8 grid grid-cols-1 gap-x-10 gap-y-6 lg:grid-cols-2">
                     {block.groups.map((group) => (
                       <div key={group.subtitle ?? block.title}>
                         {group.subtitle && (
@@ -79,10 +73,10 @@ export default async function SpecializedBlocks() {
                       </div>
                     ))}
                   </div>
-                </Reveal>
+                </div>
               </div>
-            );
-          })}
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>

@@ -226,14 +226,19 @@ export async function getFeatureStrip() {
   return staticData.featureStrip;
 }
 
+const CLIENT_GAIN_ICONS = ["shield", "clock", "risk", "heart", "expert", "paper", "clipboard"];
+
 export async function getClientGains() {
   if (hasDatabase) {
     try {
       const rows = await prisma.clientGain.findMany({ orderBy: { order: "asc" } });
-      if (rows.length) return rows.map((r) => r.label);
+      if (rows.length) return rows.map((r) => ({ label: r.label, icon: r.icon }));
     } catch (e) {
       console.error("[content] getClientGains failed:", e);
     }
   }
-  return staticData.clientGains;
+  return staticData.clientGains.map((label, i) => ({
+    label,
+    icon: CLIENT_GAIN_ICONS[i % CLIENT_GAIN_ICONS.length],
+  }));
 }

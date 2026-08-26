@@ -75,10 +75,12 @@ export default function ServicesClient({
   services,
   eyebrow,
   headline,
+  intro,
 }: {
   services: ServiceItem[];
   eyebrow: string;
   headline: string;
+  intro: string;
 }) {
   // First render (server + initial client) stays deterministic to avoid a
   // hydration mismatch; the random 9 are picked right after mount instead.
@@ -92,6 +94,9 @@ export default function ServicesClient({
 
   const list = showAll ? services : preview;
   const hiddenCount = services.length - PREVIEW_COUNT;
+  const introText = intro
+    .replace("{{total}}", String(services.length))
+    .replace("{{preview}}", String(PREVIEW_COUNT));
 
   return (
     <section id="servicos" className="bg-forest-950 py-28">
@@ -105,9 +110,7 @@ export default function ServicesClient({
               {headline}
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-white/60">
-              A Avanço Ambiental atua em {services.length} frentes de consultoria
-              ambiental. Veja abaixo uma seleção de {PREVIEW_COUNT} serviços — ou
-              explore a lista completa.
+              {introText}
             </p>
           </div>
         </Reveal>

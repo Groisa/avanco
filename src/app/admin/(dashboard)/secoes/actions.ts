@@ -18,7 +18,7 @@ const EDITABLE_FIELDS = new Set([
   "aboutStat1Value", "aboutStat1Label", "aboutStat2Value", "aboutStat2Label",
   "aboutImage1", "aboutImage2",
   "pillarsEyebrow", "pillarsHeadline",
-  "servicesEyebrow", "servicesHeadline",
+  "servicesEyebrow", "servicesHeadline", "servicesIntro",
   "blocksEyebrow", "blocksHeadline",
   "sectorsEyebrow", "sectorsHeadline",
   "clientsHeadline",

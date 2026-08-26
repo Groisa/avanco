@@ -33,6 +33,7 @@ model SiteSettings {
   footerLogo        String   @default("/brand/logo-white.png")
   servicesEyebrow   String   @default("Serviços")
   servicesHeadline  String   @default("Soluções ambientais completas para cada etapa do seu projeto")
+  servicesIntro     String   @default("A Avanço Ambiental atua em {{total}} frentes de consultoria ambiental. Veja abaixo uma seleção de {{preview}} serviços — ou explore a lista completa.")
   heroCtaLabel      String   @default("Solicitar diagnóstico gratuito")
   heroSecondaryCtaLabel String @default("Conhecer serviços")
   ctaEyebrow        String   @default("Solicite um diagnóstico técnico")

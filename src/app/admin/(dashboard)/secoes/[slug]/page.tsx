@@ -118,6 +118,7 @@ export default async function SecaoPage({ params }: { params: Promise<{ slug: st
     aboutImage2: about.image2,
     servicesEyebrow: settings.servicesEyebrow,
     servicesHeadline: settings.servicesHeadline,
+    servicesIntro: settings.servicesIntro,
     ctaEyebrow: settings.ctaEyebrow,
     ctaText: settings.ctaText,
     ctaButtonLabel: settings.ctaButtonLabel,

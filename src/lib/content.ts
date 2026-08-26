@@ -45,6 +45,7 @@ export async function getSiteSettings() {
           footerLogo: row.footerLogo,
           servicesEyebrow: row.servicesEyebrow,
           servicesHeadline: row.servicesHeadline,
+          servicesIntro: row.servicesIntro,
           heroCtaLabel: row.heroCtaLabel,
           heroSecondaryCtaLabel: row.heroSecondaryCtaLabel,
           ctaEyebrow: row.ctaEyebrow,
@@ -118,6 +119,8 @@ export async function getSiteSettings() {
     footerLogo: "/brand/logo-white.png",
     servicesEyebrow: "Serviços",
     servicesHeadline: "Soluções ambientais completas para cada etapa do seu projeto",
+    servicesIntro:
+      "A Avanço Ambiental atua em {{total}} frentes de consultoria ambiental. Veja abaixo uma seleção de {{preview}} serviços — ou explore a lista completa.",
     heroCtaLabel: "Solicitar diagnóstico gratuito",
     heroSecondaryCtaLabel: "Conhecer serviços",
     ctaEyebrow: "Solicite um diagnóstico técnico",

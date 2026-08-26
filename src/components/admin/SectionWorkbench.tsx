@@ -246,14 +246,16 @@ export default function SectionWorkbench({
           fields={[
             f("servicesEyebrow", "Localização (acima do título)"),
             f("servicesHeadline", "Título da seção", "textarea", { rows: 2 }),
+            f("servicesIntro", "Texto abaixo do título (use {{total}} e {{preview}} para os números)", "textarea", { rows: 3 }),
           ]}
-          initial={pick("servicesEyebrow", "servicesHeadline")}
+          initial={pick("servicesEyebrow", "servicesHeadline", "servicesIntro")}
           manageLinks={[{ href: "/admin/servicos", label: "Editar os serviços" }]}
           renderPreview={(d) => (
             <ServicesClient
               services={data.services}
               eyebrow={d.servicesEyebrow}
               headline={d.servicesHeadline}
+              intro={d.servicesIntro}
             />
           )}
         />

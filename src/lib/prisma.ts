@@ -22,8 +22,19 @@ try {
 
 const globalForPrisma = globalThis as unknown as { prisma?: PrismaClient };
 
+// Each serverless instance opens its own pool, and Supabase's pooler caps how
+// many clients it will accept overall (session mode allows only 15). Left at
+// the pg default of 10 per instance, a couple of concurrent instances exhaust
+// it and every query starts failing — which content.ts then swallows, silently
+// serving the static fallback as if the site had never been edited. Keep the
+// per-instance pool tiny in production and let the pooler do the multiplexing.
+const POOL_MAX = process.env.NODE_ENV === "production" ? 1 : 5;
+
 function createPrismaClient() {
-  const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL ?? "" });
+  const adapter = new PrismaPg({
+    connectionString: process.env.DATABASE_URL ?? "",
+    max: POOL_MAX,
+  });
   return new PrismaClient({
     adapter,
     log: process.env.NODE_ENV === "development" ? ["error", "warn"] : ["error"],
@@ -35,4 +46,6 @@ function createPrismaClient() {
 // already handles via try/catch around every call.
 export const prisma = globalForPrisma.prisma ?? createPrismaClient();
 
-if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
+// Reuse the client (and its pool) across module re-evaluations in every
+// environment; a fresh pool per evaluation is what multiplies connections.
+globalForPrisma.prisma = prisma;

@@ -10,6 +10,9 @@ export default defineConfig({
     seed: "tsx prisma/seed.ts",
   },
   datasource: {
-    url: process.env["DATABASE_URL"],
+    // Migrations need a session connection (advisory locks), which the
+    // transaction pooler on 6543 doesn't support. DIRECT_URL points at the
+    // session pooler; DATABASE_URL stays the serverless-safe runtime URL.
+    url: process.env["DIRECT_URL"] || process.env["DATABASE_URL"],
   },
 });

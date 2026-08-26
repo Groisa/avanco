@@ -12,21 +12,68 @@ import {
   getFeatureStrip, getFormations,
 } from "@/lib/content";
 
+// Only the lists each section actually previews. Loading all 18 for every
+// section was a burst of parallel queries big enough to exhaust the database
+// connection pool on its own.
+const NEEDS: Record<string, string[]> = {
+  cabecalho: ["nav"],
+  capa: ["heroChecklist", "badges"],
+  "cards-topo": ["differentials"],
+  riscos: ["painPoints"],
+  "quem-somos": [],
+  especialidades: ["pillars"],
+  servicos: ["services"],
+  "servicos-campo": ["blocks"],
+  segmentos: ["sectors"],
+  clientes: ["clients"],
+  "por-que-nos": ["whyUs"],
+  metodo: ["process"],
+  ganhos: ["clientGains"],
+  galeria: ["gallery"],
+  duvidas: ["faq"],
+  destaques: ["featureStrip"],
+  equipe: ["formations"],
+  "quadro-contato": [],
+  contato: [],
+  rodape: ["nav"],
+};
+
 export default async function SecaoPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const section = findSection(slug);
   if (!section) notFound();
+
+  const needs = new Set(NEEDS[slug] ?? []);
+  const want = <T,>(key: string, load: () => Promise<T>, empty: T): Promise<T> =>
+    needs.has(key) ? load() : Promise.resolve(empty);
+
+  // The hero's badge fallback is derived from these counts, so they are only
+  // fetched when the capa preview has no saved badges to show.
+  const badgesNeeded = needs.has("badges");
 
   const [
     settings, nav, heroChecklist, dbBadges, differentials, painPoints,
     pillars, services, blocks, sectors, clients, whyUs, process,
     clientGains, gallery, faq, featureStrip, formations,
   ] = await Promise.all([
-    getSiteSettings(), getNavItems(), getHeroChecklist(), getHeroBadges(),
-    getDifferentials(), getPainPoints(), getPillars(), getServices(),
-    getSpecializedBlocks(), getSectors(), getClients(), getWhyUsItems(),
-    getProcessSteps(), getClientGains(), getGalleryImages(), getFaqItems(),
-    getFeatureStrip(), getFormations(),
+    getSiteSettings(),
+    want("nav", getNavItems, [] as { label: string; href: string }[]),
+    want("heroChecklist", getHeroChecklist, [] as string[]),
+    badgesNeeded ? getHeroBadges() : Promise.resolve(null),
+    want("differentials", getDifferentials, [] as { title: string; description: string }[]),
+    want("painPoints", getPainPoints, [] as string[]),
+    want("pillars", getPillars, [] as { title: string; icon: string }[]),
+    want("services", getServices, [] as WorkbenchData["services"]),
+    want("blocks", getSpecializedBlocks, [] as WorkbenchData["blocks"]),
+    want("sectors", getSectors, [] as WorkbenchData["sectors"]),
+    want("clients", getClients, [] as WorkbenchData["clients"]),
+    want("whyUs", getWhyUsItems, [] as string[]),
+    want("process", getProcessSteps, [] as WorkbenchData["process"]),
+    want("clientGains", getClientGains, [] as WorkbenchData["clientGains"]),
+    want("gallery", getGalleryImages, [] as WorkbenchData["gallery"]),
+    want("faq", getFaqItems, [] as WorkbenchData["faq"]),
+    want("featureStrip", getFeatureStrip, [] as WorkbenchData["featureStrip"]),
+    want("formations", getFormations, [] as string[]),
   ]);
 
   const { site, hero, about, headings, painPoints: painCopy } = settings;
@@ -79,11 +126,15 @@ export default async function SecaoPage({ params }: { params: Promise<{ slug: st
     ...headings,
   };
 
-  const badges = dbBadges ?? [
-    { label: "Formações técnicas na equipe", value: String(formations.length), icon: "team" },
-    { label: "Serviços ambientais prestados", value: String(services.length), icon: "check" },
-    { label: "Atendimento em Minas Gerais", value: "MG", icon: "pin" },
-  ];
+  const badges =
+    dbBadges ??
+    (badgesNeeded
+      ? [
+          { label: "Formações técnicas na equipe", value: "—", icon: "team" },
+          { label: "Serviços ambientais prestados", value: "—", icon: "check" },
+          { label: "Atendimento em Minas Gerais", value: "MG", icon: "pin" },
+        ]
+      : []);
 
   const data: WorkbenchData = {
     settings: flat,

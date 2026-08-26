@@ -17,6 +17,7 @@ export default async function ConfiguracoesPage() {
     ctaEyebrow,
     ctaText,
     ctaButtonLabel,
+    about,
   } = await getSiteSettings();
   const images = getAvailableImages();
 
@@ -100,6 +101,54 @@ export default async function ConfiguracoesPage() {
                 <Input name="heroSecondaryCtaLabel" defaultValue={heroSecondaryCtaLabel} />
               </Field>
             </div>
+          </div>
+        </Card>
+
+        <Card>
+          <p className="mb-5 font-display text-base font-medium text-forest-900">
+            Seção Quem somos
+          </p>
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+            <Field label="Localização (acima do título)">
+              <Input name="aboutEyebrow" defaultValue={about.eyebrow} />
+            </Field>
+            <Field label="Título da seção">
+              <Input name="aboutHeadline" defaultValue={about.headline} />
+            </Field>
+          </div>
+          <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
+            <Field label="Primeiro parágrafo">
+              <Textarea name="aboutText1" rows={4} defaultValue={about.text1} />
+            </Field>
+            <Field label="Segundo parágrafo">
+              <Textarea name="aboutText2" rows={4} defaultValue={about.text2} />
+            </Field>
+          </div>
+          <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
+            <div className="grid grid-cols-2 gap-3">
+              <Field label="Número 1">
+                <Input name="aboutStat1Value" defaultValue={about.stat1Value} />
+              </Field>
+              <Field label="Legenda 1">
+                <Input name="aboutStat1Label" defaultValue={about.stat1Label} />
+              </Field>
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              <Field label="Número 2">
+                <Input name="aboutStat2Value" defaultValue={about.stat2Value} />
+              </Field>
+              <Field label="Legenda 2">
+                <Input name="aboutStat2Label" defaultValue={about.stat2Label} />
+              </Field>
+            </div>
+          </div>
+          <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
+            <Field label="Foto principal">
+              <ImagePicker name="aboutImage1" defaultValue={about.image1} images={images} />
+            </Field>
+            <Field label="Foto pequena (canto)">
+              <ImagePicker name="aboutImage2" defaultValue={about.image2} images={images} />
+            </Field>
           </div>
         </Card>
 

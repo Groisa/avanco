@@ -43,6 +43,18 @@ export async function getSiteSettings() {
           ctaEyebrow: row.ctaEyebrow,
           ctaText: row.ctaText,
           ctaButtonLabel: row.ctaButtonLabel,
+          about: {
+            eyebrow: row.aboutEyebrow,
+            headline: row.aboutHeadline,
+            text1: row.aboutText1,
+            text2: row.aboutText2,
+            stat1Value: row.aboutStat1Value,
+            stat1Label: row.aboutStat1Label,
+            stat2Value: row.aboutStat2Value,
+            stat2Label: row.aboutStat2Label,
+            image1: row.aboutImage1,
+            image2: row.aboutImage2,
+          },
         };
       }
     } catch (e) {
@@ -69,6 +81,20 @@ export async function getSiteSettings() {
     ctaText:
       "Não espere receber uma notificação ambiental para agir. Nossa equipe está pronta para analisar seu empreendimento e indicar a melhor solução.",
     ctaButtonLabel: "Falar com um especialista",
+    about: {
+      eyebrow: "Quem somos",
+      headline: "Consultoria ambiental próxima, técnica e comprometida com resultado",
+      text1:
+        "A Avanço Ambiental reúne profissionais experientes para viabilizar projetos socioambientais multidisciplinares. Para cada segmento econômico, entendemos as demandas específicas do seu negócio e construímos soluções sob medida — sempre com uma relação próxima e transparente com clientes e parceiros.",
+      text2:
+        "Do estudo técnico ao acompanhamento em campo, conduzimos cada etapa com agilidade, buscando resultados rápidos e efetivos que impulsionam seu negócio com práticas ambientais sustentáveis.",
+      stat1Value: "4",
+      stat1Label: "Especialistas multidisciplinares",
+      stat2Value: "MG",
+      stat2Label: "Atendimento em todo o estado",
+      image1: "/images/campo-sondagem-solo.jpg",
+      image2: "/images/campo-viveiro-mudas.jpg",
+    },
   };
 }
 

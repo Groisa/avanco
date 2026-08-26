@@ -38,6 +38,16 @@ model SiteSettings {
   ctaEyebrow        String   @default("Solicite um diagnóstico técnico")
   ctaText           String   @default("Não espere receber uma notificação ambiental para agir. Nossa equipe está pronta para analisar seu empreendimento e indicar a melhor solução.")
   ctaButtonLabel    String   @default("Falar com um especialista")
+  aboutEyebrow      String   @default("Quem somos")
+  aboutHeadline     String   @default("Consultoria ambiental próxima, técnica e comprometida com resultado")
+  aboutText1        String   @default("A Avanço Ambiental reúne profissionais experientes para viabilizar projetos socioambientais multidisciplinares. Para cada segmento econômico, entendemos as demandas específicas do seu negócio e construímos soluções sob medida — sempre com uma relação próxima e transparente com clientes e parceiros.")
+  aboutText2        String   @default("Do estudo técnico ao acompanhamento em campo, conduzimos cada etapa com agilidade, buscando resultados rápidos e efetivos que impulsionam seu negócio com práticas ambientais sustentáveis.")
+  aboutStat1Value   String   @default("4")
+  aboutStat1Label   String   @default("Especialistas multidisciplinares")
+  aboutStat2Value   String   @default("MG")
+  aboutStat2Label   String   @default("Atendimento em todo o estado")
+  aboutImage1       String   @default("/images/campo-sondagem-solo.jpg")
+  aboutImage2       String   @default("/images/campo-viveiro-mudas.jpg")
   updatedAt         DateTime @updatedAt
 }
 

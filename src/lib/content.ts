@@ -2,9 +2,16 @@ import { prisma, hasDatabase } from "./prisma";
 import * as staticData from "@/data/site";
 
 // Every getter below is DB-first: once Supabase is connected and seeded, it
-// serves live rows. Until then (or if a query fails), it falls back to the
-// static data in src/data/site.ts so the public site never breaks. Failures
-// are logged (not swallowed) so they show up in Vercel's function logs.
+// serves live rows. The static data in src/data/site.ts is the fallback for
+// the two cases where there is genuinely nothing to read — the database isn't
+// configured yet, or the table hasn't been seeded.
+//
+// A failed query is NOT one of those cases, so it rethrows. Swallowing it used
+// to return the original hardcoded copy, and because the public page is
+// statically cached, that wrong render got stored as the new page: an edit
+// would apply, then "revert" to the pre-edit text and stay there. Throwing
+// instead makes Next keep serving the last good cached page and try again
+// later. Failures are logged either way, so they show up in Vercel's logs.
 
 export async function getSiteSettings() {
   if (hasDatabase) {
@@ -94,6 +101,7 @@ export async function getSiteSettings() {
       }
     } catch (e) {
       console.error("[content] getSiteSettings failed:", e);
+      throw e;
     }
   }
   return {
@@ -178,6 +186,7 @@ export async function getServices() {
       if (rows.length) return rows;
     } catch (e) {
       console.error("[content] getServices failed:", e);
+      throw e;
     }
   }
   return staticData.services;
@@ -190,6 +199,7 @@ export async function getSectors() {
       if (rows.length) return rows;
     } catch (e) {
       console.error("[content] getSectors failed:", e);
+      throw e;
     }
   }
   return staticData.sectors;
@@ -202,6 +212,7 @@ export async function getFormations() {
       if (rows.length) return rows.map((r) => r.name);
     } catch (e) {
       console.error("[content] getFormations failed:", e);
+      throw e;
     }
   }
   return staticData.formations;
@@ -214,6 +225,7 @@ export async function getClients() {
       if (rows.length) return rows;
     } catch (e) {
       console.error("[content] getClients failed:", e);
+      throw e;
     }
   }
   return staticData.clients;
@@ -226,6 +238,7 @@ export async function getGalleryImages() {
       if (rows.length) return rows;
     } catch (e) {
       console.error("[content] getGalleryImages failed:", e);
+      throw e;
     }
   }
   return staticData.galleryImages;
@@ -238,6 +251,7 @@ export async function getFaqItems() {
       if (rows.length) return rows;
     } catch (e) {
       console.error("[content] getFaqItems failed:", e);
+      throw e;
     }
   }
   return staticData.faq;
@@ -260,6 +274,7 @@ export async function getSpecializedBlocks() {
       }
     } catch (e) {
       console.error("[content] getSpecializedBlocks failed:", e);
+      throw e;
     }
   }
   return staticData.specializedBlocks;
@@ -272,6 +287,7 @@ export async function getPillars() {
       if (rows.length) return rows.map((r) => ({ title: r.title, icon: r.icon }));
     } catch (e) {
       console.error("[content] getPillars failed:", e);
+      throw e;
     }
   }
   return staticData.pillars;
@@ -284,6 +300,7 @@ export async function getHeroBadges() {
       if (rows.length) return rows.map((r) => ({ label: r.label, value: r.value, icon: r.icon }));
     } catch (e) {
       console.error("[content] getHeroBadges failed:", e);
+      throw e;
     }
   }
   return null; // Hero.tsx computes default badge values from live counts
@@ -296,6 +313,7 @@ export async function getWhyUsItems() {
       if (rows.length) return rows.map((r) => r.text);
     } catch (e) {
       console.error("[content] getWhyUsItems failed:", e);
+      throw e;
     }
   }
   return staticData.whyUs;
@@ -308,6 +326,7 @@ export async function getProcessSteps() {
       if (rows.length) return rows;
     } catch (e) {
       console.error("[content] getProcessSteps failed:", e);
+      throw e;
     }
   }
   return staticData.process;
@@ -320,6 +339,7 @@ export async function getNavItems() {
       if (rows.length) return rows.map((r) => ({ label: r.label, href: r.href }));
     } catch (e) {
       console.error("[content] getNavItems failed:", e);
+      throw e;
     }
   }
   return staticData.nav;
@@ -332,6 +352,7 @@ export async function getHeroChecklist() {
       if (rows.length) return rows.map((r) => r.text);
     } catch (e) {
       console.error("[content] getHeroChecklist failed:", e);
+      throw e;
     }
   }
   return staticData.heroChecklist;
@@ -344,6 +365,7 @@ export async function getPainPoints() {
       if (rows.length) return rows.map((r) => r.text);
     } catch (e) {
       console.error("[content] getPainPoints failed:", e);
+      throw e;
     }
   }
   return staticData.painPoints;
@@ -363,6 +385,7 @@ export async function getDifferentials() {
       if (rows.length) return rows.map((r) => ({ title: r.title, description: r.description }));
     } catch (e) {
       console.error("[content] getDifferentials failed:", e);
+      throw e;
     }
   }
   return STATIC_DIFFERENTIALS;
@@ -375,6 +398,7 @@ export async function getFeatureStrip() {
       if (rows.length) return rows;
     } catch (e) {
       console.error("[content] getFeatureStrip failed:", e);
+      throw e;
     }
   }
   return staticData.featureStrip;
@@ -389,6 +413,7 @@ export async function getClientGains() {
       if (rows.length) return rows.map((r) => ({ label: r.label, icon: r.icon }));
     } catch (e) {
       console.error("[content] getClientGains failed:", e);
+      throw e;
     }
   }
   return staticData.clientGains.map((label, i) => ({

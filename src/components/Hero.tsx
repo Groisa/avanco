@@ -1,14 +1,14 @@
 import Image from "next/image";
-import { heroChecklist } from "@/data/site";
-import { getSiteSettings, getHeroBadges, getServices, getFormations } from "@/lib/content";
+import { getSiteSettings, getHeroBadges, getServices, getFormations, getHeroChecklist } from "@/lib/content";
 import { Icon, type IconName } from "./icons";
 
 export default async function Hero() {
-  const [{ site, hero, heroCtaLabel, heroSecondaryCtaLabel }, dbBadges, services, formations] = await Promise.all([
+  const [{ site, hero, heroCtaLabel, heroSecondaryCtaLabel }, dbBadges, services, formations, heroChecklist] = await Promise.all([
     getSiteSettings(),
     getHeroBadges(),
     getServices(),
     getFormations(),
+    getHeroChecklist(),
   ]);
 
   const badges = dbBadges ?? [

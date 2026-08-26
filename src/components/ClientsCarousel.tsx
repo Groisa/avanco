@@ -1,11 +1,11 @@
 import Image from "next/image";
-import { getClients } from "@/lib/content";
+import { getClients, getSiteSettings } from "@/lib/content";
 import Reveal from "./Reveal";
 
 // Placeholder slots by default — add real client logos/names via the admin
 // panel (/admin/clientes) and this carousel updates automatically.
 export default async function ClientsCarousel() {
-  const clients = await getClients();
+  const [clients, { headings }] = await Promise.all([getClients(), getSiteSettings()]);
   const track = [...clients, ...clients];
 
   return (
@@ -13,7 +13,7 @@ export default async function ClientsCarousel() {
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <Reveal>
           <p className="text-center text-sm font-semibold uppercase tracking-[0.3em] text-ink-500">
-            Empresas e produtores que confiam na Avanço Ambiental
+            {headings.clientsHeadline}
           </p>
         </Reveal>
       </div>

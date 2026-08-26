@@ -12,7 +12,17 @@ type SiteInfo = {
   social: { instagram: string; linkedin: string; facebook: string };
 };
 
-export default function ContactClient({ site }: { site: SiteInfo }) {
+export default function ContactClient({
+  site,
+  eyebrow,
+  headline,
+  text,
+}: {
+  site: SiteInfo;
+  eyebrow: string;
+  headline: string;
+  text: string;
+}) {
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
 
@@ -26,14 +36,13 @@ export default function ContactClient({ site }: { site: SiteInfo }) {
         <Reveal>
           <div className="max-w-2xl">
             <p className="text-sm font-semibold uppercase tracking-[0.3em] text-moss-300">
-              Contato
+              {eyebrow}
             </p>
             <h2 className="mt-4 text-balance font-display text-3xl font-medium leading-tight text-white sm:text-4xl">
-              Vamos avançar juntos com o seu projeto
+              {headline}
             </h2>
             <p className="mt-5 text-lg leading-relaxed text-white/70">
-              Fale com a nossa equipe e receba uma proposta sob medida para a
-              sua demanda ambiental.
+              {text}
             </p>
           </div>
         </Reveal>

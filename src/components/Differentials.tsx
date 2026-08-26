@@ -1,25 +1,9 @@
+import { getDifferentials } from "@/lib/content";
 import Reveal from "./Reveal";
 
-const items = [
-  {
-    title: "Equipe multidisciplinar",
-    description: "Engenharia florestal, ambiental, civil e geologia sob o mesmo teto.",
-  },
-  {
-    title: "Presença em campo",
-    description: "Sondagem, coleta e monitoramento acompanhados de perto, sítio por sítio.",
-  },
-  {
-    title: "Do estudo à licença",
-    description: "Condução completa do processo junto aos órgãos ambientais.",
-  },
-  {
-    title: "Proximidade real",
-    description: "Relação próxima e transparente, com soluções sob medida para cada demanda.",
-  },
-];
+export default async function Differentials() {
+  const items = await getDifferentials();
 
-export default function Differentials() {
   return (
     <section className="relative z-10 -mt-14 px-6 lg:px-10">
       <Reveal>

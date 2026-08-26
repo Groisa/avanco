@@ -1,10 +1,10 @@
 import Image from "next/image";
-import { getSectors } from "@/lib/content";
+import { getSectors, getSiteSettings } from "@/lib/content";
 import { Icon, type IconName } from "./icons";
 import Reveal from "./Reveal";
 
 export default async function Sectors() {
-  const sectors = await getSectors();
+  const [sectors, { headings }] = await Promise.all([getSectors(), getSiteSettings()]);
 
   return (
     <section id="segmentos" className="bg-sand-300 py-28">
@@ -12,10 +12,10 @@ export default async function Sectors() {
         <Reveal>
           <div className="text-center">
             <p className="text-sm font-semibold uppercase tracking-[0.3em] text-clay-600">
-              Segmentos
+              {headings.sectorsEyebrow}
             </p>
             <h2 className="mx-auto mt-4 max-w-2xl text-balance font-display text-3xl font-medium leading-tight text-forest-900 sm:text-4xl">
-              Atendemos diversos segmentos
+              {headings.sectorsHeadline}
             </h2>
           </div>
         </Reveal>

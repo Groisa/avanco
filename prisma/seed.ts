@@ -103,6 +103,35 @@ async function main() {
     });
   }
 
+  if ((await prisma.navItem.count()) === 0) {
+    await prisma.navItem.createMany({
+      data: data.nav.map((n, order) => ({ ...n, order })),
+    });
+  }
+
+  if ((await prisma.heroChecklistItem.count()) === 0) {
+    await prisma.heroChecklistItem.createMany({
+      data: data.heroChecklist.map((text, order) => ({ text, order })),
+    });
+  }
+
+  if ((await prisma.painPoint.count()) === 0) {
+    await prisma.painPoint.createMany({
+      data: data.painPoints.map((text, order) => ({ text, order })),
+    });
+  }
+
+  if ((await prisma.differential.count()) === 0) {
+    await prisma.differential.createMany({
+      data: [
+        { title: "Equipe multidisciplinar", description: "Engenharia florestal, ambiental, civil e geologia sob o mesmo teto.", order: 0 },
+        { title: "Presença em campo", description: "Sondagem, coleta e monitoramento acompanhados de perto, sítio por sítio.", order: 1 },
+        { title: "Do estudo à licença", description: "Condução completa do processo junto aos órgãos ambientais.", order: 2 },
+        { title: "Proximidade real", description: "Relação próxima e transparente, com soluções sob medida para cada demanda.", order: 3 },
+      ],
+    });
+  }
+
   if ((await prisma.featureStripItem.count()) === 0) {
     await prisma.featureStripItem.createMany({
       data: data.featureStrip.map((f, order) => ({ ...f, order })),

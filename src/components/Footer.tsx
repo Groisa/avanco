@@ -1,9 +1,8 @@
 import Image from "next/image";
-import { nav } from "@/data/site";
-import { getSiteSettings } from "@/lib/content";
+import { getSiteSettings, getNavItems } from "@/lib/content";
 
 export default async function Footer() {
-  const { site, footerLogo } = await getSiteSettings();
+  const [{ site, footerLogo }, nav] = await Promise.all([getSiteSettings(), getNavItems()]);
 
   return (
     <footer className="bg-forest-950 border-t border-white/10 py-12">

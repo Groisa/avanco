@@ -55,6 +55,41 @@ export async function getSiteSettings() {
             image1: row.aboutImage1,
             image2: row.aboutImage2,
           },
+          headerLogoDark: row.headerLogoDark,
+          headerLogoLight: row.headerLogoLight,
+          headerCtaLabel: row.headerCtaLabel,
+          painPoints: {
+            headline: row.painPointsHeadline,
+            label: row.painPointsLabel,
+            text: row.painPointsText,
+            image: row.painPointsImage,
+          },
+          headings: {
+            pillarsEyebrow: row.pillarsEyebrow,
+            pillarsHeadline: row.pillarsHeadline,
+            blocksEyebrow: row.blocksEyebrow,
+            blocksHeadline: row.blocksHeadline,
+            sectorsEyebrow: row.sectorsEyebrow,
+            sectorsHeadline: row.sectorsHeadline,
+            clientsHeadline: row.clientsHeadline,
+            whyUsEyebrow: row.whyUsEyebrow,
+            whyUsHeadline: row.whyUsHeadline,
+            whyUsImage: row.whyUsImage,
+            processEyebrow: row.processEyebrow,
+            processHeadline: row.processHeadline,
+            gainsHeadline: row.gainsHeadline,
+            galleryEyebrow: row.galleryEyebrow,
+            galleryHeadline: row.galleryHeadline,
+            faqEyebrow: row.faqEyebrow,
+            faqHeadline: row.faqHeadline,
+            faqImage: row.faqImage,
+            teamEyebrow: row.teamEyebrow,
+            teamHeadline: row.teamHeadline,
+            teamText: row.teamText,
+            contactEyebrow: row.contactEyebrow,
+            contactHeadline: row.contactHeadline,
+            contactText: row.contactText,
+          },
         };
       }
     } catch (e) {
@@ -94,6 +129,44 @@ export async function getSiteSettings() {
       stat2Label: "Atendimento em todo o estado",
       image1: "/images/campo-sondagem-solo.jpg",
       image2: "/images/campo-viveiro-mudas.jpg",
+    },
+    headerLogoDark: "/brand/logo-dark.png",
+    headerLogoLight: "/brand/logo-white.png",
+    headerCtaLabel: "Fale com especialista",
+    painPoints: {
+      headline:
+        "Enquanto você cuida do seu negócio, nós cuidamos da sua regularização ambiental.",
+      label: "Problemas ambientais podem gerar:",
+      text: "Nossa equipe acompanha todo o processo junto aos órgãos ambientais para que sua empresa continue crescendo de forma segura.",
+      image: "/images/campo-retroescavadeira.jpg",
+    },
+    headings: {
+      pillarsEyebrow: "Especialidades",
+      pillarsHeadline: "Somos especialistas em soluções ambientais",
+      blocksEyebrow: "Serviços de campo",
+      blocksHeadline: "Investigação, execução e precisão em cada etapa",
+      sectorsEyebrow: "Segmentos",
+      sectorsHeadline: "Atendemos diversos segmentos",
+      clientsHeadline: "Empresas e produtores que confiam na Avanço Ambiental",
+      whyUsEyebrow: "Por que escolher a Avanço Ambiental?",
+      whyUsHeadline: "Uma equipe técnica próxima do seu projeto, do início ao fim",
+      whyUsImage: "/images/equipe-campo-01.jpg",
+      processEyebrow: "Nosso método",
+      processHeadline: "Método de trabalho",
+      gainsHeadline: "O que nossos clientes ganham",
+      galleryEyebrow: "Galeria",
+      galleryHeadline: "O nosso trabalho, visto do chão e do alto",
+      faqEyebrow: "Perguntas frequentes",
+      faqHeadline: "Dúvidas frequentes",
+      faqImage: "/images/campo-viveiro-mudas.jpg",
+      teamEyebrow: "Equipe",
+      teamHeadline: "Formações multidisciplinares, presentes em campo",
+      teamText:
+        "Nossa equipe reúne profissionais de diferentes formações técnicas, trabalhando juntos para viabilizar o seu projeto do início ao fim.",
+      contactEyebrow: "Contato",
+      contactHeadline: "Vamos avançar juntos com o seu projeto",
+      contactText:
+        "Fale com a nossa equipe e receba uma proposta sob medida para a sua demanda ambiental.",
     },
   };
 }
@@ -238,6 +311,61 @@ export async function getProcessSteps() {
     }
   }
   return staticData.process;
+}
+
+export async function getNavItems() {
+  if (hasDatabase) {
+    try {
+      const rows = await prisma.navItem.findMany({ orderBy: { order: "asc" } });
+      if (rows.length) return rows.map((r) => ({ label: r.label, href: r.href }));
+    } catch (e) {
+      console.error("[content] getNavItems failed:", e);
+    }
+  }
+  return staticData.nav;
+}
+
+export async function getHeroChecklist() {
+  if (hasDatabase) {
+    try {
+      const rows = await prisma.heroChecklistItem.findMany({ orderBy: { order: "asc" } });
+      if (rows.length) return rows.map((r) => r.text);
+    } catch (e) {
+      console.error("[content] getHeroChecklist failed:", e);
+    }
+  }
+  return staticData.heroChecklist;
+}
+
+export async function getPainPoints() {
+  if (hasDatabase) {
+    try {
+      const rows = await prisma.painPoint.findMany({ orderBy: { order: "asc" } });
+      if (rows.length) return rows.map((r) => r.text);
+    } catch (e) {
+      console.error("[content] getPainPoints failed:", e);
+    }
+  }
+  return staticData.painPoints;
+}
+
+const STATIC_DIFFERENTIALS = [
+  { title: "Equipe multidisciplinar", description: "Engenharia florestal, ambiental, civil e geologia sob o mesmo teto." },
+  { title: "Presença em campo", description: "Sondagem, coleta e monitoramento acompanhados de perto, sítio por sítio." },
+  { title: "Do estudo à licença", description: "Condução completa do processo junto aos órgãos ambientais." },
+  { title: "Proximidade real", description: "Relação próxima e transparente, com soluções sob medida para cada demanda." },
+];
+
+export async function getDifferentials() {
+  if (hasDatabase) {
+    try {
+      const rows = await prisma.differential.findMany({ orderBy: { order: "asc" } });
+      if (rows.length) return rows.map((r) => ({ title: r.title, description: r.description }));
+    } catch (e) {
+      console.error("[content] getDifferentials failed:", e);
+    }
+  }
+  return STATIC_DIFFERENTIALS;
 }
 
 export async function getFeatureStrip() {

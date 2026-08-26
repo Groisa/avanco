@@ -1,16 +1,21 @@
 import Image from "next/image";
-import { painPoints } from "@/data/site";
+import { getPainPoints, getSiteSettings } from "@/lib/content";
 import { Icon } from "./icons";
 import Reveal from "./Reveal";
 
-export default function PainPoints() {
+export default async function PainPoints() {
+  const [painPoints, { painPoints: copy }] = await Promise.all([
+    getPainPoints(),
+    getSiteSettings(),
+  ]);
+
   return (
     <section className="bg-sand-100 py-24">
       <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-14 px-6 lg:grid-cols-2 lg:gap-20 lg:px-10">
         <Reveal>
           <div className="relative aspect-[4/5] w-full max-w-md overflow-hidden rounded-3xl">
             <Image
-              src="/images/campo-retroescavadeira.jpg"
+              src={copy.image}
               alt="Especialista da Avanço Ambiental acompanhando obra em campo"
               fill
               sizes="(min-width: 1024px) 35vw, 90vw"
@@ -21,12 +26,11 @@ export default function PainPoints() {
 
         <Reveal delay={100}>
           <h2 className="text-balance font-display text-3xl font-medium leading-tight text-forest-900 sm:text-4xl">
-            Enquanto você cuida do seu negócio, nós cuidamos da sua
-            regularização ambiental.
+            {copy.headline}
           </h2>
 
           <p className="mt-8 text-sm font-semibold uppercase tracking-[0.2em] text-clay-600">
-            Problemas ambientais podem gerar:
+            {copy.label}
           </p>
           <ul className="mt-4 flex flex-wrap gap-3">
             {painPoints.map((point) => (
@@ -43,9 +47,7 @@ export default function PainPoints() {
           </ul>
 
           <p className="mt-8 max-w-lg text-lg leading-relaxed text-ink-700">
-            Nossa equipe acompanha todo o processo junto aos órgãos
-            ambientais para que sua empresa continue crescendo de forma
-            segura.
+            {copy.text}
           </p>
         </Reveal>
       </div>

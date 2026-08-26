@@ -5,6 +5,10 @@ import { PageHeader, Card, SetupNotice } from "@/components/admin/ui";
 
 const sections: { href: string; label: string; description: string; icon: IconName }[] = [
   { href: "/admin/configuracoes", label: "Configurações e Hero", description: "Contato, endereço, redes sociais e texto do topo.", icon: "gear" },
+  { href: "/admin/menu", label: "Menu de navegação", description: "Links do menu no topo e no rodapé.", icon: "map" },
+  { href: "/admin/checklist", label: "Checklist da capa", description: "Itens com check abaixo do texto da capa.", icon: "check" },
+  { href: "/admin/cards-topo", label: "Cards abaixo da capa", description: "Os 4 cards brancos logo abaixo da capa.", icon: "clipboard" },
+  { href: "/admin/riscos", label: "Riscos ambientais", description: "Multas, Embargos e demais riscos listados.", icon: "risk" },
   { href: "/admin/servicos", label: "Serviços", description: "Catálogo de serviços com foto e descrição.", icon: "document" },
   { href: "/admin/blocos", label: "Blocos de campo", description: "Sondagem de Solo, Execução Ambiental e Topografia.", icon: "field" },
   { href: "/admin/segmentos", label: "Segmentos", description: "Setores atendidos (Indústrias, Mineração, etc).", icon: "map" },

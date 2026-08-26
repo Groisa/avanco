@@ -1,9 +1,9 @@
-import { getPillars } from "@/lib/content";
+import { getPillars, getSiteSettings } from "@/lib/content";
 import { Icon, type IconName } from "./icons";
 import Reveal from "./Reveal";
 
 export default async function Pillars() {
-  const pillars = await getPillars();
+  const [pillars, { headings }] = await Promise.all([getPillars(), getSiteSettings()]);
 
   return (
     <section className="bg-forest-900 py-24">
@@ -11,10 +11,10 @@ export default async function Pillars() {
         <Reveal>
           <div className="text-center">
             <p className="text-sm font-semibold uppercase tracking-[0.3em] text-moss-300">
-              Especialidades
+              {headings.pillarsEyebrow}
             </p>
             <h2 className="mx-auto mt-4 max-w-2xl text-balance font-display text-3xl font-medium leading-tight text-white sm:text-4xl">
-              Somos especialistas em soluções ambientais
+              {headings.pillarsHeadline}
             </h2>
           </div>
         </Reveal>

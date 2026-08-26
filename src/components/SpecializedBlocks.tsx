@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { getSpecializedBlocks } from "@/lib/content";
+import { getSpecializedBlocks, getSiteSettings } from "@/lib/content";
 import Reveal from "./Reveal";
 
 function CheckItem({ children }: { children: React.ReactNode }) {
@@ -16,7 +16,10 @@ function CheckItem({ children }: { children: React.ReactNode }) {
 }
 
 export default async function SpecializedBlocks() {
-  const specializedBlocks = await getSpecializedBlocks();
+  const [specializedBlocks, { headings }] = await Promise.all([
+    getSpecializedBlocks(),
+    getSiteSettings(),
+  ]);
 
   return (
     <section className="bg-sand-100 py-28">
@@ -24,10 +27,10 @@ export default async function SpecializedBlocks() {
         <Reveal>
           <div className="mx-auto max-w-2xl text-center">
             <p className="text-sm font-semibold uppercase tracking-[0.3em] text-clay-600">
-              Serviços de campo
+              {headings.blocksEyebrow}
             </p>
             <h2 className="mt-4 text-balance font-display text-3xl font-medium leading-tight text-forest-900 sm:text-4xl">
-              Investigação, execução e precisão em cada etapa
+              {headings.blocksHeadline}
             </h2>
           </div>
         </Reveal>

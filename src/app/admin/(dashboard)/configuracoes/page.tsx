@@ -18,6 +18,11 @@ export default async function ConfiguracoesPage() {
     ctaText,
     ctaButtonLabel,
     about,
+    headerLogoDark,
+    headerLogoLight,
+    headerCtaLabel,
+    painPoints,
+    headings,
   } = await getSiteSettings();
   const images = getAvailableImages();
 
@@ -67,6 +72,23 @@ export default async function ConfiguracoesPage() {
             </Field>
             <Field label="Facebook (URL)">
               <Input name="facebook" defaultValue={site.social.facebook} />
+            </Field>
+          </div>
+        </Card>
+
+        <Card>
+          <p className="mb-5 font-display text-base font-medium text-forest-900">
+            Cabeçalho (topo do site)
+          </p>
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
+            <Field label="Logo (fundo claro)">
+              <ImagePicker name="headerLogoDark" defaultValue={headerLogoDark} images={images} />
+            </Field>
+            <Field label="Logo (fundo escuro)">
+              <ImagePicker name="headerLogoLight" defaultValue={headerLogoLight} images={images} />
+            </Field>
+            <Field label="Texto do botão">
+              <Input name="headerCtaLabel" defaultValue={headerCtaLabel} />
             </Field>
           </div>
         </Card>
@@ -181,6 +203,128 @@ export default async function ConfiguracoesPage() {
             </Field>
             <Field label="Título da seção">
               <Input name="servicesHeadline" defaultValue={servicesHeadline} />
+            </Field>
+          </div>
+        </Card>
+
+        <Card>
+          <p className="mb-5 font-display text-base font-medium text-forest-900">
+            Seção Riscos ambientais
+          </p>
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+            <Field label="Título da seção">
+              <Textarea name="painPointsHeadline" rows={2} defaultValue={painPoints.headline} />
+            </Field>
+            <Field label="Texto acima da lista">
+              <Input name="painPointsLabel" defaultValue={painPoints.label} />
+            </Field>
+          </div>
+          <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
+            <Field label="Texto de apoio (abaixo da lista)">
+              <Textarea name="painPointsText" rows={3} defaultValue={painPoints.text} />
+            </Field>
+            <Field label="Foto da seção">
+              <ImagePicker name="painPointsImage" defaultValue={painPoints.image} images={images} />
+            </Field>
+          </div>
+        </Card>
+
+        <Card>
+          <p className="mb-5 font-display text-base font-medium text-forest-900">
+            Títulos das demais seções
+          </p>
+          <div className="space-y-6">
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+              <Field label="Especialidades — localização">
+                <Input name="pillarsEyebrow" defaultValue={headings.pillarsEyebrow} />
+              </Field>
+              <Field label="Especialidades — título">
+                <Input name="pillarsHeadline" defaultValue={headings.pillarsHeadline} />
+              </Field>
+            </div>
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+              <Field label="Serviços de campo — localização">
+                <Input name="blocksEyebrow" defaultValue={headings.blocksEyebrow} />
+              </Field>
+              <Field label="Serviços de campo — título">
+                <Input name="blocksHeadline" defaultValue={headings.blocksHeadline} />
+              </Field>
+            </div>
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+              <Field label="Segmentos — localização">
+                <Input name="sectorsEyebrow" defaultValue={headings.sectorsEyebrow} />
+              </Field>
+              <Field label="Segmentos — título">
+                <Input name="sectorsHeadline" defaultValue={headings.sectorsHeadline} />
+              </Field>
+            </div>
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+              <Field label="Clientes — título">
+                <Input name="clientsHeadline" defaultValue={headings.clientsHeadline} />
+              </Field>
+              <Field label="O que o cliente ganha — título">
+                <Input name="gainsHeadline" defaultValue={headings.gainsHeadline} />
+              </Field>
+            </div>
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
+              <Field label="Por que nos escolher — localização">
+                <Input name="whyUsEyebrow" defaultValue={headings.whyUsEyebrow} />
+              </Field>
+              <Field label="Por que nos escolher — título">
+                <Input name="whyUsHeadline" defaultValue={headings.whyUsHeadline} />
+              </Field>
+              <Field label="Por que nos escolher — foto">
+                <ImagePicker name="whyUsImage" defaultValue={headings.whyUsImage} images={images} />
+              </Field>
+            </div>
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+              <Field label="Método de trabalho — localização">
+                <Input name="processEyebrow" defaultValue={headings.processEyebrow} />
+              </Field>
+              <Field label="Método de trabalho — título">
+                <Input name="processHeadline" defaultValue={headings.processHeadline} />
+              </Field>
+            </div>
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+              <Field label="Galeria — localização">
+                <Input name="galleryEyebrow" defaultValue={headings.galleryEyebrow} />
+              </Field>
+              <Field label="Galeria — título">
+                <Input name="galleryHeadline" defaultValue={headings.galleryHeadline} />
+              </Field>
+            </div>
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
+              <Field label="Dúvidas — localização">
+                <Input name="faqEyebrow" defaultValue={headings.faqEyebrow} />
+              </Field>
+              <Field label="Dúvidas — título">
+                <Input name="faqHeadline" defaultValue={headings.faqHeadline} />
+              </Field>
+              <Field label="Dúvidas — foto">
+                <ImagePicker name="faqImage" defaultValue={headings.faqImage} images={images} />
+              </Field>
+            </div>
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+              <Field label="Equipe — localização">
+                <Input name="teamEyebrow" defaultValue={headings.teamEyebrow} />
+              </Field>
+              <Field label="Equipe — título">
+                <Input name="teamHeadline" defaultValue={headings.teamHeadline} />
+              </Field>
+            </div>
+            <Field label="Equipe — texto de apoio">
+              <Textarea name="teamText" rows={2} defaultValue={headings.teamText} />
+            </Field>
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+              <Field label="Contato — localização">
+                <Input name="contactEyebrow" defaultValue={headings.contactEyebrow} />
+              </Field>
+              <Field label="Contato — título">
+                <Input name="contactHeadline" defaultValue={headings.contactHeadline} />
+              </Field>
+            </div>
+            <Field label="Contato — texto de apoio">
+              <Textarea name="contactText" rows={2} defaultValue={headings.contactText} />
             </Field>
           </div>
         </Card>

@@ -4,7 +4,10 @@ import { Icon } from "./icons";
 import Reveal from "./Reveal";
 
 export default async function Team() {
-  const [formations, { teamImage }] = await Promise.all([getFormations(), getSiteSettings()]);
+  const [formations, { teamImage, headings }] = await Promise.all([
+    getFormations(),
+    getSiteSettings(),
+  ]);
 
   return (
     <section id="equipe" className="bg-sand-100 py-28">
@@ -25,15 +28,13 @@ export default async function Team() {
           <div>
             <Reveal>
               <p className="text-sm font-semibold uppercase tracking-[0.3em] text-clay-600">
-                Equipe
+                {headings.teamEyebrow}
               </p>
               <h2 className="mt-4 text-balance font-display text-3xl font-medium leading-tight text-forest-900 sm:text-4xl">
-                Formações multidisciplinares, presentes em campo
+                {headings.teamHeadline}
               </h2>
               <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-700">
-                Nossa equipe reúne profissionais de diferentes formações
-                técnicas, trabalhando juntos para viabilizar o seu projeto
-                do início ao fim.
+                {headings.teamText}
               </p>
             </Reveal>
 

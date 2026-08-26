@@ -3,9 +3,22 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { nav } from "@/data/site";
 
-export default function HeaderClient({ whatsapp }: { whatsapp: string }) {
+export default function HeaderClient({
+  whatsapp,
+  siteName,
+  nav,
+  logoDark,
+  logoLight,
+  ctaLabel,
+}: {
+  whatsapp: string;
+  siteName: string;
+  nav: { label: string; href: string }[];
+  logoDark: string;
+  logoLight: string;
+  ctaLabel: string;
+}) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -27,8 +40,8 @@ export default function HeaderClient({ whatsapp }: { whatsapp: string }) {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
         <Link href="#inicio" className="flex items-center">
           <Image
-            src={scrolled ? "/brand/logo-dark.png" : "/brand/logo-white.png"}
-            alt="Avanço Ambiental"
+            src={scrolled ? logoDark : logoLight}
+            alt={siteName}
             width={4883}
             height={1791}
             priority
@@ -59,7 +72,7 @@ export default function HeaderClient({ whatsapp }: { whatsapp: string }) {
             rel="noopener noreferrer"
             className="rounded-full bg-clay-500 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-clay-600"
           >
-            Fale com especialista
+            {ctaLabel}
           </a>
         </div>
 
@@ -99,7 +112,7 @@ export default function HeaderClient({ whatsapp }: { whatsapp: string }) {
               rel="noopener noreferrer"
               className="mt-2 rounded-full bg-clay-500 px-5 py-3 text-center text-sm font-semibold text-white"
             >
-              Fale com especialista
+              {ctaLabel}
             </a>
           </nav>
         </div>

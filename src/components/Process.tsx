@@ -1,8 +1,8 @@
-import { getProcessSteps } from "@/lib/content";
+import { getProcessSteps, getSiteSettings } from "@/lib/content";
 import Reveal from "./Reveal";
 
 export default async function Process() {
-  const process = await getProcessSteps();
+  const [process, { headings }] = await Promise.all([getProcessSteps(), getSiteSettings()]);
 
   return (
     <section className="bg-sand-100 py-28">
@@ -10,10 +10,10 @@ export default async function Process() {
         <Reveal>
           <div className="text-center">
             <p className="text-sm font-semibold uppercase tracking-[0.3em] text-clay-600">
-              Nosso método
+              {headings.processEyebrow}
             </p>
             <h2 className="mx-auto mt-4 max-w-2xl text-balance font-display text-3xl font-medium leading-tight text-forest-900 sm:text-4xl">
-              Método de trabalho
+              {headings.processHeadline}
             </h2>
           </div>
         </Reveal>

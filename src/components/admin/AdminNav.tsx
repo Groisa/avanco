@@ -7,6 +7,10 @@ import { Icon, type IconName } from "@/components/icons";
 const links: { href: string; label: string; icon: IconName; exact?: boolean }[] = [
   { href: "/admin", label: "Início", icon: "home", exact: true },
   { href: "/admin/configuracoes", label: "Configurações e Hero", icon: "gear" },
+  { href: "/admin/menu", label: "Menu de navegação", icon: "map" },
+  { href: "/admin/checklist", label: "Checklist da capa", icon: "check" },
+  { href: "/admin/cards-topo", label: "Cards abaixo da capa", icon: "clipboard" },
+  { href: "/admin/riscos", label: "Riscos ambientais", icon: "risk" },
   { href: "/admin/servicos", label: "Serviços", icon: "document" },
   { href: "/admin/blocos", label: "Blocos de campo", icon: "field" },
   { href: "/admin/segmentos", label: "Segmentos", icon: "map" },

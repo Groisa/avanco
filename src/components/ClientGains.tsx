@@ -1,16 +1,16 @@
-import { getClientGains } from "@/lib/content";
+import { getClientGains, getSiteSettings } from "@/lib/content";
 import { Icon, type IconName } from "./icons";
 import Reveal from "./Reveal";
 
 export default async function ClientGains() {
-  const clientGains = await getClientGains();
+  const [clientGains, { headings }] = await Promise.all([getClientGains(), getSiteSettings()]);
 
   return (
     <section className="bg-forest-950 py-20">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <Reveal>
           <p className="text-center text-sm font-semibold uppercase tracking-[0.3em] text-moss-300">
-            O que nossos clientes ganham
+            {headings.gainsHeadline}
           </p>
         </Reveal>
 

@@ -21,8 +21,12 @@ const spanClasses = [
 
 export default function GalleryClient({
   galleryImages,
+  eyebrow,
+  headline,
 }: {
   galleryImages: { src: string; alt: string }[];
+  eyebrow: string;
+  headline: string;
 }) {
   const [active, setActive] = useState<number | null>(null);
 
@@ -32,10 +36,10 @@ export default function GalleryClient({
         <Reveal>
           <div className="max-w-2xl">
             <p className="text-sm font-semibold uppercase tracking-[0.3em] text-moss-300">
-              Galeria
+              {eyebrow}
             </p>
             <h2 className="mt-4 text-balance font-display text-3xl font-medium leading-tight text-white sm:text-4xl">
-              O nosso trabalho, visto do chão e do alto
+              {headline}
             </h2>
           </div>
         </Reveal>

@@ -1,9 +1,9 @@
 import Image from "next/image";
-import { getWhyUsItems } from "@/lib/content";
+import { getWhyUsItems, getSiteSettings } from "@/lib/content";
 import Reveal from "./Reveal";
 
 export default async function WhyUs() {
-  const whyUs = await getWhyUsItems();
+  const [whyUs, { headings }] = await Promise.all([getWhyUsItems(), getSiteSettings()]);
   const half = Math.ceil(whyUs.length / 2);
   const [colA, colB] = [whyUs.slice(0, half), whyUs.slice(half)];
 
@@ -13,7 +13,7 @@ export default async function WhyUs() {
         <Reveal>
           <div className="relative aspect-[4/5] w-full max-w-md overflow-hidden rounded-3xl">
             <Image
-              src="/images/equipe-campo-01.jpg"
+              src={headings.whyUsImage}
               alt="Profissional da Avanço Ambiental em campo"
               fill
               sizes="(min-width: 1024px) 35vw, 90vw"
@@ -24,10 +24,10 @@ export default async function WhyUs() {
 
         <Reveal delay={100}>
           <p className="text-sm font-semibold uppercase tracking-[0.3em] text-moss-300">
-            Por que escolher a Avanço Ambiental?
+            {headings.whyUsEyebrow}
           </p>
           <h2 className="mt-4 text-balance font-display text-3xl font-medium leading-tight text-white sm:text-4xl">
-            Uma equipe técnica próxima do seu projeto, do início ao fim
+            {headings.whyUsHeadline}
           </h2>
 
           <div className="mt-10 grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2">

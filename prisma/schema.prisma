@@ -48,7 +48,78 @@ model SiteSettings {
   aboutStat2Label   String   @default("Atendimento em todo o estado")
   aboutImage1       String   @default("/images/campo-sondagem-solo.jpg")
   aboutImage2       String   @default("/images/campo-viveiro-mudas.jpg")
+
+  headerLogoDark    String   @default("/brand/logo-dark.png")
+  headerLogoLight   String   @default("/brand/logo-white.png")
+  headerCtaLabel    String   @default("Fale com especialista")
+
+  painPointsHeadline String  @default("Enquanto você cuida do seu negócio, nós cuidamos da sua regularização ambiental.")
+  painPointsLabel   String   @default("Problemas ambientais podem gerar:")
+  painPointsText    String   @default("Nossa equipe acompanha todo o processo junto aos órgãos ambientais para que sua empresa continue crescendo de forma segura.")
+  painPointsImage   String   @default("/images/campo-retroescavadeira.jpg")
+
+  pillarsEyebrow    String   @default("Especialidades")
+  pillarsHeadline   String   @default("Somos especialistas em soluções ambientais")
+
+  blocksEyebrow     String   @default("Serviços de campo")
+  blocksHeadline    String   @default("Investigação, execução e precisão em cada etapa")
+
+  sectorsEyebrow    String   @default("Segmentos")
+  sectorsHeadline   String   @default("Atendemos diversos segmentos")
+
+  clientsHeadline   String   @default("Empresas e produtores que confiam na Avanço Ambiental")
+
+  whyUsEyebrow      String   @default("Por que escolher a Avanço Ambiental?")
+  whyUsHeadline     String   @default("Uma equipe técnica próxima do seu projeto, do início ao fim")
+  whyUsImage        String   @default("/images/equipe-campo-01.jpg")
+
+  processEyebrow    String   @default("Nosso método")
+  processHeadline   String   @default("Método de trabalho")
+
+  gainsHeadline     String   @default("O que nossos clientes ganham")
+
+  galleryEyebrow    String   @default("Galeria")
+  galleryHeadline   String   @default("O nosso trabalho, visto do chão e do alto")
+
+  faqEyebrow        String   @default("Perguntas frequentes")
+  faqHeadline       String   @default("Dúvidas frequentes")
+  faqImage          String   @default("/images/campo-viveiro-mudas.jpg")
+
+  teamEyebrow       String   @default("Equipe")
+  teamHeadline      String   @default("Formações multidisciplinares, presentes em campo")
+  teamText          String   @default("Nossa equipe reúne profissionais de diferentes formações técnicas, trabalhando juntos para viabilizar o seu projeto do início ao fim.")
+
+  contactEyebrow    String   @default("Contato")
+  contactHeadline   String   @default("Vamos avançar juntos com o seu projeto")
+  contactText       String   @default("Fale com a nossa equipe e receba uma proposta sob medida para a sua demanda ambiental.")
+
   updatedAt         DateTime @updatedAt
+}
+
+model NavItem {
+  id    String @id @default(cuid())
+  label String
+  href  String
+  order Int    @default(0)
+}
+
+model HeroChecklistItem {
+  id    String @id @default(cuid())
+  text  String
+  order Int    @default(0)
+}
+
+model PainPoint {
+  id    String @id @default(cuid())
+  text  String
+  order Int    @default(0)
+}
+
+model Differential {
+  id          String @id @default(cuid())
+  title       String
+  description String
+  order       Int    @default(0)
 }
 
 model FeatureStripItem {

@@ -6,8 +6,14 @@ import Reveal from "./Reveal";
 
 export default function FAQClient({
   faq,
+  eyebrow,
+  headline,
+  image,
 }: {
   faq: { question: string; answer: string }[];
+  eyebrow: string;
+  headline: string;
+  image: string;
 }) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
@@ -16,10 +22,10 @@ export default function FAQClient({
       <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-14 px-6 lg:grid-cols-2 lg:gap-20 lg:px-10">
         <Reveal>
           <p className="text-sm font-semibold uppercase tracking-[0.3em] text-clay-600">
-            Perguntas frequentes
+            {eyebrow}
           </p>
           <h2 className="mt-4 max-w-md text-balance font-display text-3xl font-medium leading-tight text-forest-900 sm:text-4xl">
-            Dúvidas frequentes
+            {headline}
           </h2>
 
           <div className="mt-10 space-y-3">
@@ -67,7 +73,7 @@ export default function FAQClient({
         <Reveal delay={100}>
           <div className="relative aspect-[4/5] w-full max-w-md overflow-hidden rounded-3xl lg:ml-auto">
             <Image
-              src="/images/campo-viveiro-mudas.jpg"
+              src={image}
               alt="Mudas nativas cultivadas para projetos de recuperação ambiental"
               fill
               sizes="(min-width: 1024px) 35vw, 90vw"

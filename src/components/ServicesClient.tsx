@@ -135,10 +135,10 @@ export default function ServicesClient({
                   <h3 className="font-display text-xl font-medium text-white">
                     {service.title}
                   </h3>
-                  <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-white/75 transition-opacity duration-300 group-hover:opacity-100 sm:opacity-0">
+                  <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-white/75">
                     {service.description}
                   </p>
-                  <span className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-moss-300 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                  <span className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-moss-300">
                     Ver mais
                     <svg viewBox="0 0 20 20" fill="none" className="h-3.5 w-3.5">
                       <path d="M7.5 5 12.5 10 7.5 15" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />

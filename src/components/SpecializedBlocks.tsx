@@ -36,7 +36,7 @@ export default async function SpecializedBlocks() {
           {specializedBlocks.map((block) => (
             <Reveal key={block.title}>
               <div className="overflow-hidden rounded-3xl bg-white shadow-sm shadow-ink-900/5 ring-1 ring-ink-900/5">
-                <div className="relative aspect-[16/9] w-full sm:aspect-[2.4/1]">
+                <div className="relative aspect-[4/3] w-full sm:aspect-[16/9]">
                   <Image
                     src={block.image}
                     alt={block.title}

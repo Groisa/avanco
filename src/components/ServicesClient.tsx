@@ -81,8 +81,8 @@ export default function ServicesClient({
                     {service.title}
                   </h3>
                   <p
-                    className={`mt-2 overflow-hidden text-sm leading-relaxed text-white/75 transition-all duration-500 ease-out group-hover:max-h-32 group-hover:opacity-100 ${
-                      openTitle === service.title ? "max-h-32 opacity-100" : "max-h-0 opacity-0"
+                    className={`mt-2 overflow-hidden text-sm leading-relaxed text-white/75 transition-all duration-500 ease-out group-hover:max-h-[28rem] group-hover:opacity-100 ${
+                      openTitle === service.title ? "max-h-[28rem] opacity-100" : "max-h-0 opacity-0"
                     }`}
                   >
                     {service.description}

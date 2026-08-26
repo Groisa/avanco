@@ -38,6 +38,11 @@ export async function getSiteSettings() {
           footerLogo: row.footerLogo,
           servicesEyebrow: row.servicesEyebrow,
           servicesHeadline: row.servicesHeadline,
+          heroCtaLabel: row.heroCtaLabel,
+          heroSecondaryCtaLabel: row.heroSecondaryCtaLabel,
+          ctaEyebrow: row.ctaEyebrow,
+          ctaText: row.ctaText,
+          ctaButtonLabel: row.ctaButtonLabel,
         };
       }
     } catch (e) {
@@ -58,6 +63,12 @@ export async function getSiteSettings() {
     footerLogo: "/brand/logo-white.png",
     servicesEyebrow: "Serviços",
     servicesHeadline: "Soluções ambientais completas para cada etapa do seu projeto",
+    heroCtaLabel: "Solicitar diagnóstico gratuito",
+    heroSecondaryCtaLabel: "Conhecer serviços",
+    ctaEyebrow: "Solicite um diagnóstico técnico",
+    ctaText:
+      "Não espere receber uma notificação ambiental para agir. Nossa equipe está pronta para analisar seu empreendimento e indicar a melhor solução.",
+    ctaButtonLabel: "Falar com um especialista",
   };
 }
 

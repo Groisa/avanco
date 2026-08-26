@@ -30,6 +30,11 @@ export async function saveSettings(formData: FormData) {
       footerLogo: get("footerLogo"),
       servicesEyebrow: get("servicesEyebrow"),
       servicesHeadline: get("servicesHeadline"),
+      heroCtaLabel: get("heroCtaLabel"),
+      heroSecondaryCtaLabel: get("heroSecondaryCtaLabel"),
+      ctaEyebrow: get("ctaEyebrow"),
+      ctaText: get("ctaText"),
+      ctaButtonLabel: get("ctaButtonLabel"),
     },
     update: {
       name: get("name"),
@@ -52,6 +57,11 @@ export async function saveSettings(formData: FormData) {
       footerLogo: get("footerLogo"),
       servicesEyebrow: get("servicesEyebrow"),
       servicesHeadline: get("servicesHeadline"),
+      heroCtaLabel: get("heroCtaLabel"),
+      heroSecondaryCtaLabel: get("heroSecondaryCtaLabel"),
+      ctaEyebrow: get("ctaEyebrow"),
+      ctaText: get("ctaText"),
+      ctaButtonLabel: get("ctaButtonLabel"),
     },
   });
 

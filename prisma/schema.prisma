@@ -33,6 +33,11 @@ model SiteSettings {
   footerLogo        String   @default("/brand/logo-white.png")
   servicesEyebrow   String   @default("Serviços")
   servicesHeadline  String   @default("Soluções ambientais completas para cada etapa do seu projeto")
+  heroCtaLabel      String   @default("Solicitar diagnóstico gratuito")
+  heroSecondaryCtaLabel String @default("Conhecer serviços")
+  ctaEyebrow        String   @default("Solicite um diagnóstico técnico")
+  ctaText           String   @default("Não espere receber uma notificação ambiental para agir. Nossa equipe está pronta para analisar seu empreendimento e indicar a melhor solução.")
+  ctaButtonLabel    String   @default("Falar com um especialista")
   updatedAt         DateTime @updatedAt
 }
 

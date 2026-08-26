@@ -5,7 +5,19 @@ import { Card, Field, Input, Textarea, ImagePicker, SaveButton, PageHeader, Setu
 import { saveSettings } from "./actions";
 
 export default async function ConfiguracoesPage() {
-  const { site, hero, teamImage, footerLogo, servicesEyebrow, servicesHeadline } = await getSiteSettings();
+  const {
+    site,
+    hero,
+    teamImage,
+    footerLogo,
+    servicesEyebrow,
+    servicesHeadline,
+    heroCtaLabel,
+    heroSecondaryCtaLabel,
+    ctaEyebrow,
+    ctaText,
+    ctaButtonLabel,
+  } = await getSiteSettings();
   const images = getAvailableImages();
 
   return (
@@ -76,9 +88,36 @@ export default async function ConfiguracoesPage() {
               <Input name="heroHeadlineGreen" defaultValue={hero.headlineGreen} />
             </Field>
           </div>
-          <div className="mt-5">
+          <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
             <Field label="Texto de apoio">
               <Textarea name="heroSubtext" rows={3} defaultValue={hero.subtext} />
+            </Field>
+            <div className="grid grid-cols-1 gap-5">
+              <Field label="Botão principal">
+                <Input name="heroCtaLabel" defaultValue={heroCtaLabel} />
+              </Field>
+              <Field label="Botão secundário">
+                <Input name="heroSecondaryCtaLabel" defaultValue={heroSecondaryCtaLabel} />
+              </Field>
+            </div>
+          </div>
+        </Card>
+
+        <Card>
+          <p className="mb-5 font-display text-base font-medium text-forest-900">
+            Quadro de contato (antes do rodapé)
+          </p>
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+            <Field label="Localização (acima do título)">
+              <Input name="ctaEyebrow" defaultValue={ctaEyebrow} />
+            </Field>
+            <Field label="Texto do botão">
+              <Input name="ctaButtonLabel" defaultValue={ctaButtonLabel} />
+            </Field>
+          </div>
+          <div className="mt-5">
+            <Field label="Texto de apoio">
+              <Textarea name="ctaText" rows={3} defaultValue={ctaText} />
             </Field>
           </div>
         </Card>

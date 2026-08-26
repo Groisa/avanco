@@ -1,43 +1,26 @@
 import { getSiteSettings } from "@/lib/content";
 import { hasDatabase } from "@/lib/prisma";
-import { getAvailableImages } from "@/lib/images";
-import { Card, Field, Input, Textarea, ImagePicker, SaveButton, PageHeader, SetupNotice } from "@/components/admin/ui";
-import { saveSettings } from "./actions";
+import { Card, Field, Input, SaveButton, PageHeader, SetupNotice } from "@/components/admin/ui";
+import { saveSection } from "../secoes/actions";
 
+// Section-specific copy and images are edited under /admin/secoes/[slug],
+// where each field sits next to a live preview. This page keeps only the
+// company-wide data that shows up in several sections at once.
 export default async function ConfiguracoesPage() {
-  const {
-    site,
-    hero,
-    teamImage,
-    footerLogo,
-    servicesEyebrow,
-    servicesHeadline,
-    heroCtaLabel,
-    heroSecondaryCtaLabel,
-    ctaEyebrow,
-    ctaText,
-    ctaButtonLabel,
-    about,
-    headerLogoDark,
-    headerLogoLight,
-    headerCtaLabel,
-    painPoints,
-    headings,
-  } = await getSiteSettings();
-  const images = getAvailableImages();
+  const { site } = await getSiteSettings();
 
   return (
     <div>
       <PageHeader
-        title="Configurações e Hero"
-        description="Dados de contato exibidos no site e o texto principal da capa (hero)."
+        title="Contato e dados gerais"
+        description="Informações da empresa usadas em várias seções do site. Para editar os textos e imagens de uma seção específica, use o menu Seções da página."
       />
       {!hasDatabase && <SetupNotice />}
 
-      <form action={saveSettings} className="space-y-8">
+      <form action={saveSection} className="space-y-8">
         <Card>
           <p className="mb-5 font-display text-base font-medium text-forest-900">
-            Contato e empresa
+            Empresa
           </p>
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
             <Field label="Nome da empresa">
@@ -46,6 +29,14 @@ export default async function ConfiguracoesPage() {
             <Field label="Slogan (rodapé)">
               <Input name="tagline" defaultValue={site.tagline} />
             </Field>
+          </div>
+        </Card>
+
+        <Card>
+          <p className="mb-5 font-display text-base font-medium text-forest-900">
+            Contato
+          </p>
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
             <Field label="Telefone 1">
               <Input name="phone1" defaultValue={site.phone1} />
             </Field>
@@ -64,6 +55,14 @@ export default async function ConfiguracoesPage() {
             <Field label="Endereço — linha 2">
               <Input name="addressLine2" defaultValue={site.address.line2} />
             </Field>
+          </div>
+        </Card>
+
+        <Card>
+          <p className="mb-5 font-display text-base font-medium text-forest-900">
+            Redes sociais
+          </p>
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
             <Field label="Instagram (URL)">
               <Input name="instagram" defaultValue={site.social.instagram} />
             </Field>
@@ -76,274 +75,7 @@ export default async function ConfiguracoesPage() {
           </div>
         </Card>
 
-        <Card>
-          <p className="mb-5 font-display text-base font-medium text-forest-900">
-            Cabeçalho (topo do site)
-          </p>
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
-            <Field label="Logo (fundo claro)">
-              <ImagePicker name="headerLogoDark" defaultValue={headerLogoDark} images={images} />
-            </Field>
-            <Field label="Logo (fundo escuro)">
-              <ImagePicker name="headerLogoLight" defaultValue={headerLogoLight} images={images} />
-            </Field>
-            <Field label="Texto do botão">
-              <Input name="headerCtaLabel" defaultValue={headerCtaLabel} />
-            </Field>
-          </div>
-        </Card>
-
-        <Card>
-          <p className="mb-5 font-display text-base font-medium text-forest-900">
-            Capa (Hero)
-          </p>
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-            <Field label="Localização (acima do título)">
-              <Input name="heroEyebrow" defaultValue={hero.eyebrow} />
-            </Field>
-            <Field label="Imagem de fundo">
-              <ImagePicker name="heroImage" defaultValue={hero.image} images={images} />
-            </Field>
-            <Field label="Título — parte branca">
-              <Input name="heroHeadlineWhite" defaultValue={hero.headlineWhite} />
-            </Field>
-            <Field label="Título — parte verde">
-              <Input name="heroHeadlineGreen" defaultValue={hero.headlineGreen} />
-            </Field>
-          </div>
-          <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
-            <Field label="Texto de apoio">
-              <Textarea name="heroSubtext" rows={3} defaultValue={hero.subtext} />
-            </Field>
-            <div className="grid grid-cols-1 gap-5">
-              <Field label="Botão principal">
-                <Input name="heroCtaLabel" defaultValue={heroCtaLabel} />
-              </Field>
-              <Field label="Botão secundário">
-                <Input name="heroSecondaryCtaLabel" defaultValue={heroSecondaryCtaLabel} />
-              </Field>
-            </div>
-          </div>
-        </Card>
-
-        <Card>
-          <p className="mb-5 font-display text-base font-medium text-forest-900">
-            Seção Quem somos
-          </p>
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-            <Field label="Localização (acima do título)">
-              <Input name="aboutEyebrow" defaultValue={about.eyebrow} />
-            </Field>
-            <Field label="Título da seção">
-              <Input name="aboutHeadline" defaultValue={about.headline} />
-            </Field>
-          </div>
-          <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
-            <Field label="Primeiro parágrafo">
-              <Textarea name="aboutText1" rows={4} defaultValue={about.text1} />
-            </Field>
-            <Field label="Segundo parágrafo">
-              <Textarea name="aboutText2" rows={4} defaultValue={about.text2} />
-            </Field>
-          </div>
-          <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
-            <div className="grid grid-cols-2 gap-3">
-              <Field label="Número 1">
-                <Input name="aboutStat1Value" defaultValue={about.stat1Value} />
-              </Field>
-              <Field label="Legenda 1">
-                <Input name="aboutStat1Label" defaultValue={about.stat1Label} />
-              </Field>
-            </div>
-            <div className="grid grid-cols-2 gap-3">
-              <Field label="Número 2">
-                <Input name="aboutStat2Value" defaultValue={about.stat2Value} />
-              </Field>
-              <Field label="Legenda 2">
-                <Input name="aboutStat2Label" defaultValue={about.stat2Label} />
-              </Field>
-            </div>
-          </div>
-          <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
-            <Field label="Foto principal">
-              <ImagePicker name="aboutImage1" defaultValue={about.image1} images={images} />
-            </Field>
-            <Field label="Foto pequena (canto)">
-              <ImagePicker name="aboutImage2" defaultValue={about.image2} images={images} />
-            </Field>
-          </div>
-        </Card>
-
-        <Card>
-          <p className="mb-5 font-display text-base font-medium text-forest-900">
-            Quadro de contato (antes do rodapé)
-          </p>
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-            <Field label="Localização (acima do título)">
-              <Input name="ctaEyebrow" defaultValue={ctaEyebrow} />
-            </Field>
-            <Field label="Texto do botão">
-              <Input name="ctaButtonLabel" defaultValue={ctaButtonLabel} />
-            </Field>
-          </div>
-          <div className="mt-5">
-            <Field label="Texto de apoio">
-              <Textarea name="ctaText" rows={3} defaultValue={ctaText} />
-            </Field>
-          </div>
-        </Card>
-
-        <Card>
-          <p className="mb-5 font-display text-base font-medium text-forest-900">
-            Seção Serviços
-          </p>
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-            <Field label="Localização (acima do título)">
-              <Input name="servicesEyebrow" defaultValue={servicesEyebrow} />
-            </Field>
-            <Field label="Título da seção">
-              <Input name="servicesHeadline" defaultValue={servicesHeadline} />
-            </Field>
-          </div>
-        </Card>
-
-        <Card>
-          <p className="mb-5 font-display text-base font-medium text-forest-900">
-            Seção Riscos ambientais
-          </p>
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-            <Field label="Título da seção">
-              <Textarea name="painPointsHeadline" rows={2} defaultValue={painPoints.headline} />
-            </Field>
-            <Field label="Texto acima da lista">
-              <Input name="painPointsLabel" defaultValue={painPoints.label} />
-            </Field>
-          </div>
-          <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
-            <Field label="Texto de apoio (abaixo da lista)">
-              <Textarea name="painPointsText" rows={3} defaultValue={painPoints.text} />
-            </Field>
-            <Field label="Foto da seção">
-              <ImagePicker name="painPointsImage" defaultValue={painPoints.image} images={images} />
-            </Field>
-          </div>
-        </Card>
-
-        <Card>
-          <p className="mb-5 font-display text-base font-medium text-forest-900">
-            Títulos das demais seções
-          </p>
-          <div className="space-y-6">
-            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-              <Field label="Especialidades — localização">
-                <Input name="pillarsEyebrow" defaultValue={headings.pillarsEyebrow} />
-              </Field>
-              <Field label="Especialidades — título">
-                <Input name="pillarsHeadline" defaultValue={headings.pillarsHeadline} />
-              </Field>
-            </div>
-            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-              <Field label="Serviços de campo — localização">
-                <Input name="blocksEyebrow" defaultValue={headings.blocksEyebrow} />
-              </Field>
-              <Field label="Serviços de campo — título">
-                <Input name="blocksHeadline" defaultValue={headings.blocksHeadline} />
-              </Field>
-            </div>
-            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-              <Field label="Segmentos — localização">
-                <Input name="sectorsEyebrow" defaultValue={headings.sectorsEyebrow} />
-              </Field>
-              <Field label="Segmentos — título">
-                <Input name="sectorsHeadline" defaultValue={headings.sectorsHeadline} />
-              </Field>
-            </div>
-            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-              <Field label="Clientes — título">
-                <Input name="clientsHeadline" defaultValue={headings.clientsHeadline} />
-              </Field>
-              <Field label="O que o cliente ganha — título">
-                <Input name="gainsHeadline" defaultValue={headings.gainsHeadline} />
-              </Field>
-            </div>
-            <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
-              <Field label="Por que nos escolher — localização">
-                <Input name="whyUsEyebrow" defaultValue={headings.whyUsEyebrow} />
-              </Field>
-              <Field label="Por que nos escolher — título">
-                <Input name="whyUsHeadline" defaultValue={headings.whyUsHeadline} />
-              </Field>
-              <Field label="Por que nos escolher — foto">
-                <ImagePicker name="whyUsImage" defaultValue={headings.whyUsImage} images={images} />
-              </Field>
-            </div>
-            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-              <Field label="Método de trabalho — localização">
-                <Input name="processEyebrow" defaultValue={headings.processEyebrow} />
-              </Field>
-              <Field label="Método de trabalho — título">
-                <Input name="processHeadline" defaultValue={headings.processHeadline} />
-              </Field>
-            </div>
-            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-              <Field label="Galeria — localização">
-                <Input name="galleryEyebrow" defaultValue={headings.galleryEyebrow} />
-              </Field>
-              <Field label="Galeria — título">
-                <Input name="galleryHeadline" defaultValue={headings.galleryHeadline} />
-              </Field>
-            </div>
-            <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
-              <Field label="Dúvidas — localização">
-                <Input name="faqEyebrow" defaultValue={headings.faqEyebrow} />
-              </Field>
-              <Field label="Dúvidas — título">
-                <Input name="faqHeadline" defaultValue={headings.faqHeadline} />
-              </Field>
-              <Field label="Dúvidas — foto">
-                <ImagePicker name="faqImage" defaultValue={headings.faqImage} images={images} />
-              </Field>
-            </div>
-            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-              <Field label="Equipe — localização">
-                <Input name="teamEyebrow" defaultValue={headings.teamEyebrow} />
-              </Field>
-              <Field label="Equipe — título">
-                <Input name="teamHeadline" defaultValue={headings.teamHeadline} />
-              </Field>
-            </div>
-            <Field label="Equipe — texto de apoio">
-              <Textarea name="teamText" rows={2} defaultValue={headings.teamText} />
-            </Field>
-            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-              <Field label="Contato — localização">
-                <Input name="contactEyebrow" defaultValue={headings.contactEyebrow} />
-              </Field>
-              <Field label="Contato — título">
-                <Input name="contactHeadline" defaultValue={headings.contactHeadline} />
-              </Field>
-            </div>
-            <Field label="Contato — texto de apoio">
-              <Textarea name="contactText" rows={2} defaultValue={headings.contactText} />
-            </Field>
-          </div>
-        </Card>
-
-        <Card>
-          <p className="mb-5 font-display text-base font-medium text-forest-900">
-            Outras imagens do site
-          </p>
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-            <Field label="Foto da seção Equipe">
-              <ImagePicker name="teamImage" defaultValue={teamImage} images={images} />
-            </Field>
-            <Field label="Logo do rodapé">
-              <ImagePicker name="footerLogo" defaultValue={footerLogo} images={images} />
-            </Field>
-          </div>
-        </Card>
-
-        <SaveButton>Salvar configurações</SaveButton>
+        <SaveButton>Salvar</SaveButton>
       </form>
     </div>
   );

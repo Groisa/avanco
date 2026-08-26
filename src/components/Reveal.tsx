@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, type ReactNode } from "react";
+import { useIsPreview } from "./preview/PreviewContext";
 
 export default function Reveal({
   children,
@@ -12,8 +13,10 @@ export default function Reveal({
   className?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
+  const isPreview = useIsPreview();
 
   useEffect(() => {
+    if (isPreview) return;
     const el = ref.current;
     if (!el) return;
 
@@ -29,7 +32,13 @@ export default function Reveal({
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, []);
+  }, [isPreview]);
+
+  // Inside the admin preview there is nothing to scroll into view, so skip
+  // the animation entirely and render the content already visible.
+  if (isPreview) {
+    return <div className={className}>{children}</div>;
+  }
 
   return (
     <div

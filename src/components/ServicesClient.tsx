@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Reveal from "./Reveal";
+import { Icon } from "./icons";
 
 const PREVIEW_COUNT = 9;
 
@@ -15,6 +16,59 @@ function pickRandom<T>(arr: T[], count: number) {
     [copy[i], copy[j]] = [copy[j], copy[i]];
   }
   return copy.slice(0, count);
+}
+
+function ServiceModal({ service, onClose }: { service: ServiceItem; onClose: () => void }) {
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [onClose]);
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-forest-950/80 p-4 backdrop-blur-sm sm:p-8"
+      onClick={onClose}
+    >
+      <div
+        className="relative flex max-h-full w-full max-w-2xl flex-col overflow-hidden rounded-3xl bg-forest-950 shadow-2xl ring-1 ring-white/10"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Fechar"
+          className="absolute right-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-forest-950/60 text-white backdrop-blur-sm transition hover:bg-forest-950/80"
+        >
+          <Icon name="x" className="h-4 w-4" />
+        </button>
+
+        <div className="relative h-56 w-full shrink-0 sm:h-72">
+          <Image
+            src={service.image}
+            alt=""
+            fill
+            sizes="(min-width: 640px) 42rem, 100vw"
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-forest-950 via-forest-950/10 to-transparent" />
+        </div>
+
+        <div className="overflow-y-auto p-6 sm:p-8">
+          <h3 className="font-display text-2xl font-medium text-white">{service.title}</h3>
+          <p className="mt-4 whitespace-pre-line text-sm leading-relaxed text-white/75 sm:text-base">
+            {service.description}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default function ServicesClient({
@@ -30,7 +84,7 @@ export default function ServicesClient({
   // hydration mismatch; the random 9 are picked right after mount instead.
   const [preview, setPreview] = useState(() => services.slice(0, PREVIEW_COUNT));
   const [showAll, setShowAll] = useState(false);
-  const [openTitle, setOpenTitle] = useState<string | null>(null);
+  const [selected, setSelected] = useState<ServiceItem | null>(null);
 
   useEffect(() => {
     setPreview(pickRandom(services, PREVIEW_COUNT));
@@ -63,9 +117,7 @@ export default function ServicesClient({
             <Reveal key={service.title} delay={(i % 3) * 90}>
               <button
                 type="button"
-                onClick={() =>
-                  setOpenTitle((current) => (current === service.title ? null : service.title))
-                }
+                onClick={() => setSelected(service)}
                 className="group relative block h-80 w-full overflow-hidden rounded-2xl text-left"
               >
                 <Image
@@ -80,13 +132,15 @@ export default function ServicesClient({
                   <h3 className="font-display text-xl font-medium text-white">
                     {service.title}
                   </h3>
-                  <p
-                    className={`mt-2 overflow-hidden text-sm leading-relaxed text-white/75 transition-all duration-500 ease-out group-hover:max-h-[28rem] group-hover:opacity-100 ${
-                      openTitle === service.title ? "max-h-[28rem] opacity-100" : "max-h-0 opacity-0"
-                    }`}
-                  >
+                  <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-white/75 transition-opacity duration-300 group-hover:opacity-100 sm:opacity-0">
                     {service.description}
                   </p>
+                  <span className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-moss-300 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                    Ver mais
+                    <svg viewBox="0 0 20 20" fill="none" className="h-3.5 w-3.5">
+                      <path d="M7.5 5 12.5 10 7.5 15" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </span>
                 </div>
               </button>
             </Reveal>
@@ -120,6 +174,8 @@ export default function ServicesClient({
           </div>
         )}
       </div>
+
+      {selected && <ServiceModal service={selected} onClose={() => setSelected(null)} />}
     </section>
   );
 }
